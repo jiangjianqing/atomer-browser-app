@@ -23,7 +23,7 @@
   "homepage": "https://github.com/jiangjianqing/atomer-browser-app#readme",
   "browserify": {
     "entries": [
-      "./app/main.js"
+      "./lib/entry.js"
     ],
     "require": [
       "assert",
