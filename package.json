@@ -31,7 +31,11 @@
       "querystring",
       "stream",
       "util",
-      "buffer"
+      "buffer",
+
+      "vue",
+      "q",
+      "axios"
     ],
     "transform": [
       "brfs"
