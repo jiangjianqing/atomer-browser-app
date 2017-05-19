@@ -86,6 +86,13 @@
         console.log(require('q'));
         console.log(require('axios'));
         console.log(require('vue'));
+
+        var localStorage = require('browser-storage')();
+        if (!localStorage.getItem("test")){
+            localStorage.setItem("test", "second test");
+        }
+
+        console.log(localStorage);
     </script>
 </body>
 </html>
