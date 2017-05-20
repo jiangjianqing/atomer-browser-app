@@ -11,3 +11,7 @@ https://www.npmjs.com/package/axios
 https://www.npmjs.com/package/gulp
 
 browserify -r assert -r events -r querystring -r stream -r util -r buffer ./app/main.js > ./dist/common.js
+
+##使用以下第三方库作为基础功能模块
+handlebars  --  模板处理
+vue -- view处理，类似还有react，但是vue感觉更接地气
