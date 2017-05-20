@@ -41,7 +41,8 @@
       "buffer",
       "vue",
       "q",
-      "axios"
+      "axios",
+      "handlebars"
     ],
     "transform": [
       "brfs",
@@ -50,6 +51,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "handlebars": "^4.0.8",
     "js-cookie": "^2.1.4",
     "q": "^1.5.0",
     "vue": "^2.3.3"
