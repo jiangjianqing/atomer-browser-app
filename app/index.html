@@ -94,6 +94,13 @@
 
         console.log(localStorage);
 
+        var cookie = require('browser-storage')({type:"cookie"});
+        console.log(cookie);
+
+        cookie.setItem("l12323","3333");
+
+        console.log(cookie.getItem("l12323"));
+
         //一定要注意：jquery是通过browserify-shim引入的，只能在由browserify打包、符合commonjs规范的模块中使用
         //所以在index.html中直接使用会出错
         //console.log(require("jquery"));
