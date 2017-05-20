@@ -21,7 +21,14 @@
     "url": "https://github.com/jiangjianqing/atomer-browser-app/issues"
   },
   "homepage": "https://github.com/jiangjianqing/atomer-browser-app#readme",
+  "browser":{
+    "jquery" : "./vendor/jquery-3.2.1.min.js"
+  },
+  "browserify-shim": {
+    "jquery": "global:jQuery"
+  },
   "browserify": {
+    "debug" : true,
     "entries": [
       "./lib/entry.js"
     ],
@@ -32,13 +39,13 @@
       "stream",
       "util",
       "buffer",
-
       "vue",
       "q",
       "axios"
     ],
     "transform": [
-      "brfs"
+      "brfs",
+      "browserify-shim"
     ]
   },
   "dependencies": {
@@ -49,7 +56,9 @@
   "devDependencies": {
     "brfs": "^1.4.3",
     "browserify": "^14.3.0",
+    "browserify-shim": "^3.8.14",
     "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }
