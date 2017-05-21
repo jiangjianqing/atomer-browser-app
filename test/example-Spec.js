@@ -24,7 +24,7 @@ describe('example test', () => {
     });
 
     it('example fail test', done => {
-        done()
+        done();
     });
 
 });
