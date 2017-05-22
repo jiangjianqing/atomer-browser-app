@@ -11,21 +11,40 @@ module.exports = {
     //2、进出口文件配置
     entry:__dirname+'/lib/entry.js',//指定的入口文件
     output: {//输出
-        path: __dirname+'/dist',//输出路径
+        path: path.resolve('./dist'),//输出路径
         filename: 'webpack-bundle.js'//输出文件名
+    },
+    // 表示这个依赖项是外部lib，遇到require它不需要编译，
+    // 且在浏览器端对应window.React
+    externals: {
+        'react': 'window.React'
     },
     module: {//在配置文件里添加加载器说明，指明每种文件需要什么加载器处理
         loaders: [
+            {
+                test: /\.js$/,
+                exclude:/node_modules/,
+                loader: [ //多个loader一起使用
+                    {
+                        loader:'babel-loader',
+                        query:babelConfig
+                    },
+                    //重要：结合使用webpack和browserify的transform
+                    "transform-loader?brfs",
+                    "transform-loader?browserify-shim"
+                ]
+            },
             {//json加载器
                 test: /\.json$/,
-                loader: "json-loader"//注意-loader不能省略，网上说能省略，经测试编译会报错
+                loader: "json-loader"
             },
+            /* 20170522 暂时都放在上面同一个loader中测试一下是否可行
             {//5、编译es6配置
                 test:/\.js$/,
                 exclude:/node_modules/,
                 loader:'babel-loader',//在webpack的module部分的loaders里进行配置即可
                 query:babelConfig
-            },
+            },*/
             {//3、CSS-loader
                 test:/\.css$/,
                 loader:'style-loader!css-loader'//添加对样式表的处理
@@ -57,5 +76,36 @@ module.exports = {
         }
     },
 
-    plugins:[]//插件
+    plugins:[],//插件
+
+    //https://webpack.github.io/docs/configuration.html#devtool
+    devtool: '#eval-source-map'
+};
+
+//如果是产品模式则设定一些
+if (process.env.NODE_ENV === 'production') {
+    module.exports.devtool = '#source-map';
+    // http://vue-loader.vuejs.org/en/workflow/production.html
+
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        })
+    ]);
+    /*
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.OccurenceOrderPlugin()
+    ])*/
 }
