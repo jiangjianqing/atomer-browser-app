@@ -26,3 +26,8 @@ npm install -g karma-cli
 ```
 mocha则集成进命令行 -- 通过npm test 启动
 上述两种方法组合使用
+
+##babel的使用
+browserify中使用babelify   transform
+webpack中使用babel-loader
+mocha中使用参数配置直接调用babel
