@@ -25,7 +25,7 @@ gulp.task("build", function(){
 
     //注意：这里使用gulp.dest()输出时会出现问题，使用process.stdout输出则不会，测试后加入source和buffer急性转换即可
     return b.bundle()
-        .pipe(source('common-'+package.version+'.js')) // gives streaming vinyl file object
+        .pipe(source('common-bundle-'+package.version+'.js')) // gives streaming vinyl file object
         .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sourcemaps.write("."))
