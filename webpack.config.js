@@ -3,6 +3,7 @@
  */
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     //2、进出口文件配置
@@ -17,26 +18,33 @@ module.exports = {
         'react': 'window.React'
     },
     module: {//在配置文件里添加加载器说明，指明每种文件需要什么加载器处理
-        loaders: [
+        rules: [
             {//20170522:经测试，多个同样的测试放在一起最ok
                 test: /\.js$/,
                 exclude:/node_modules/,
-                loader: [ //多个loader一起使用
-                    'babel-loader', //es2015处理
+                use : [ //多个loader一起使用
+                    {//es2015处理
+                        loader : 'babel-loader'
+                    },
                     //重要：结合使用webpack和browserify的transform
                     "transform-loader?brfs",
                     "transform-loader?browserify-shim"
                 ]
             },
-            {//json加载器
-                test: /\.json$/,
-                loader: "json-loader"
-            },
              //20170522 暂时都放在上面同一个loader中测试一下是否可行
 
             {//3、CSS-loader
                 test:/\.css$/,
-                loader:'style-loader!css-loader'//添加对样式表的处理,感叹号的作用在于使同一文件能够使用不同类型的loader
+                use : [
+                    {loader : "style-loader"},
+                    {
+                        loader : "css-loader",
+                        options : {
+                            modules : true
+                        }
+                    }
+                ]
+                //loader:'style-loader!css-loader'//deprecated,感叹号的作用在于使同一文件能够使用不同类型的loader
             }
 
         ]
@@ -65,7 +73,11 @@ module.exports = {
         }
     },
 
-    plugins:[],//插件
+    plugins:[
+        new HtmlWebpackPlugin({
+            template: __dirname + "/app/index.tmpl.html"
+        })
+    ],//插件
 
     //使用eval打包源文件模块，在同一个文件中生成干净的完整的source map。
     //这个选项可以在不影响构建速度的前提下生成完整的sourcemap，但是对打包后输出的JS文件的执行具有性能和安全的隐患。
@@ -85,22 +97,10 @@ if (process.env.NODE_ENV === 'production') {
             'process.env': {
                 NODE_ENV: '"production"'
             }
-        })//,
-        //new webpack.optimize.UglifyJsPlugin()
-        //new ExtractTextPlugin("[name]-[hash].css")
-    ]);
-    /*
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
         }),
         new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.optimize.OccurenceOrderPlugin()
-    ])*/
+            sourceMap : true
+        })
+        //new ExtractTextPlugin("[name]-[hash].css")
+    ]);
 }
