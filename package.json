@@ -4,7 +4,9 @@
   "description": "skeleton of my browser app",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "dev": "webpack-dev-server --config ./webpack.config.js",
+    "test": "mocha",
+    "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -66,6 +68,7 @@
     "browserify": "^14.3.0",
     "browserify-shim": "^3.8.14",
     "chai": "^3.5.0",
+    "cross-env": "^5.0.0",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^2.6.0",
     "karma": "^1.7.0",
@@ -77,6 +80,8 @@
     "mocha": "^3.2.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.9.0"
+    "watchify": "^3.9.0",
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
