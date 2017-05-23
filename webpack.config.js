@@ -28,7 +28,7 @@ module.exports = {
     },
     output: {//输出
         //20170523:publicPath的设置对webpack-dev-server的设置有影响,暂时关闭
-        //publicPath: "",    //publicPath对HtmlWebpackPlugin有影响
+        publicPath: "/assets/",    //publicPath对HtmlWebpackPlugin有影响
         path: BUILD_PATH,//输出路径
         //filename: 'webpack-bundle.js'//输出文件名
         filename: '[name].js',  //这里的name指的是entry中的app

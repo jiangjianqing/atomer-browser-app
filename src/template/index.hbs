@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <title>Webpack Sample Project</title>
 
+        <!-- assets 与webpack.config.js中的publicPath 相关 -->
         {{#each htmlWebpackPlugin.options.dllBundleInfo}}
-            <script src="../{{this.js}}"></script>
+            <script src="assets/../{{this.js}}"></script>
             <!--Key: {{@key}} Value = {{this.js}}-->
         {{/each}}
     </head>
