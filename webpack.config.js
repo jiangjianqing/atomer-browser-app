@@ -114,6 +114,8 @@ module.exports = {
             path.join(__dirname, "assets")
         ],
 
+        hot : true,
+
         historyApiFallback: true,//spa使用html5的route mode , 不跳转
         inline: true,//实时刷新
 
