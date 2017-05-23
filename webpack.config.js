@@ -5,12 +5,12 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var BUILD_PATH;
-if (process.env.NODE_ENV === 'production') {
-    BUILD_PATH = path.resolve('./dist/release');
-}else{
-    BUILD_PATH = path.resolve('./dist/dev');
-}
+//dllBundleInfo是在webpack.dll中生成，记录了所有bundle的文件信息，用于向index.hbs中注入
+var dllBundleInfo = require("./dist/dll-bundle-info.json");
+
+var __DEV__ = !(process.env.NODE_ENV === 'production');
+
+var BUILD_PATH = __DEV__ ? path.resolve('./dist/dev') : path.resolve('./dist/release');
 
 module.exports = {
     //2、进出口文件配置
@@ -39,6 +39,8 @@ module.exports = {
     },
     module: {//在配置文件里添加加载器说明，指明每种文件需要什么加载器处理
         rules: [
+            { test: /\.hbs$/, loader: "handlebars-loader" },
+
             {//20170522:经测试，多个同样的测试放在一起最ok
                 test: /\.js$/,
                 exclude:/node_modules/,
@@ -119,6 +121,7 @@ module.exports = {
 
     plugins:[
         /*
+        //CommonsChunkPlugin与dll一样可以实现类似的公共库分离效果，但dll可以前置编译，更好用
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: Infinity
@@ -126,6 +129,23 @@ module.exports = {
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./dist/dll-manifest.json')//此处路径为上面webpack.config.dll.js中DllPlugin插件中的path
+        }),
+        new HtmlWebpackPlugin({
+            //favicon:'./src/images/icon_logo.png', //favicon路径
+            filename: 'index.html', //生成的html存放路径，相对于 path
+            template: './src/template/index.hbs', //html模板路径
+            dllBundleInfo: dllBundleInfo, //向index.hbs中注入bundle文件
+            inject: true,
+            hash: true,
+            minify: __DEV__ ? false : {
+                collapseWhitespace: true,
+                collapseInlineTagWhitespace: true,
+                removeRedundantAttributes: true,
+                removeEmptyAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                removeComments: true
+            }
         })
 
     ],//插件
@@ -142,7 +162,7 @@ module.exports = {
 };
 
 //如果是产品模式则设定一些
-if (process.env.NODE_ENV === 'production') {
+if (!__DEV__) {
     //在一个单独的文件中产生一个完整且功能完全的文件。这个文件具有最好的source map，但是它会减慢打包文件的构建速度；
     module.exports.devtool = '#source-map';
     // http://vue-loader.vuejs.org/en/workflow/production.html
@@ -154,30 +174,9 @@ if (process.env.NODE_ENV === 'production') {
                 BABEL_ENV: JSON.stringify('production')
             }
         }),
-        new HtmlWebpackPlugin({
-            //favicon:'./src/images/icon_logo.png', //favicon路径
-            //filename: '../index.html', //生成的html存放路径，相对于 path
-            template: './src/template/index.html', //html模板路径
-            inject: true,
-            hash: true,
-            minify: {//压缩HTML文件
-                removeComments:true,    //移除HTML中的注释
-                collapseWhitespace:true    //删除空白符与换行符
-            }
-        }),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap : true
         })
         //new ExtractTextPlugin("[name]-[hash].css")
-    ]);
-}else{
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new HtmlWebpackPlugin({
-            //favicon:'./src/images/icon_logo.png', //favicon路径
-            //filename: '../index.html', //生成的html存放路径，相对于 path
-            template: './src/template/index.html', //html模板路径
-            inject: true,
-            hash: true
-        })
     ]);
 }

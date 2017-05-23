@@ -3,9 +3,15 @@
     <head>
         <meta charset="utf-8">
         <title>Webpack Sample Project</title>
+
+        {{#each htmlWebpackPlugin.options.dllBundleInfo}}
+            <script src="../{{this.js}}"></script>
+            <!--Key: {{@key}} Value = {{this.js}}-->
+        {{/each}}
     </head>
     <body>
         <div id='root'>
         </div>
     </body>
+
 </html>

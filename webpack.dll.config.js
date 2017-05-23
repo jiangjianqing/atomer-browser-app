@@ -1,5 +1,6 @@
-const webpack = require('webpack');
-const path = require('path');
+var webpack = require('webpack');
+var path = require('path');
+var AssetsPlugin = require('assets-webpack-plugin');
 
 var BUILD_PATH = path.resolve('./dist');
 module.exports = {
@@ -37,7 +38,7 @@ module.exports = {
     },
     output: {
         path: BUILD_PATH,
-        filename: 'dll.[name].js',
+        filename: 'dll.[name].[hash].js',
         library: '[name]'
     },
     module: {
@@ -85,6 +86,11 @@ module.exports = {
             path: path.join(__dirname, 'dist/dll-manifest.json'),
             name: '[name]',
             context: __dirname
+        }),
+        new AssetsPlugin({ //生成bundleinfo.json，用于向index.hbs中注入
+            prettyPrint: true,
+            filename: '/dll-bundle-info.json',
+            path: BUILD_PATH
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
