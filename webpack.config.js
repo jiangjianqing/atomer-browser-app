@@ -5,12 +5,32 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var BUILD_PATH;
+if (process.env.NODE_ENV === 'production') {
+    BUILD_PATH = path.resolve('./dist/release');
+}else{
+    BUILD_PATH = path.resolve('./dist/dev');
+}
+
 module.exports = {
     //2、进出口文件配置
-    entry:__dirname+'/lib/entry.js',//指定的入口文件
+    //entry:__dirname+'/lib/entry.js',//指定的入口文件
+    entry: {
+        app: [/*'babel-polyfill',*/path.join(__dirname, "/lib/entry.js")]
+        //, vendor: [
+            //'vue'
+            /*
+            'backbone',
+            'handlebars'*/
+        //]
+    },
     output: {//输出
-        path: path.resolve('./dist'),//输出路径
-        filename: 'webpack-bundle.js'//输出文件名
+        publicPath: ".",    //publicPath对HtmlWebpackPlugin有影响
+        path: BUILD_PATH,//输出路径
+        //filename: 'webpack-bundle.js'//输出文件名
+        filename: '[name].js',  //这里的name指的是entry中的app
+        //chunkFilename: "[id].bundle.js",
+        chunkFilename: '[name].[chunkhash:5].min.js'
     },
     // 表示这个依赖项是外部lib，遇到require它不需要编译，
     // 且在浏览器端对应window.React
@@ -42,9 +62,33 @@ module.exports = {
                         options : {
                             modules : true
                         }
-                    }
+                    },
+                    'autoprefixer-loader'
                 ]
                 //loader:'style-loader!css-loader'//deprecated,感叹号的作用在于使同一文件能够使用不同类型的loader
+            },
+
+            {
+                test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
+                exclude: /^node_modules$/,
+                use:[{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]'
+                    }
+                }]
+            },
+
+            {
+                test: /\.(png|jpg|gif)$/,
+                exclude: /^node_modules$/,
+                use:[{
+                    loader: 'url-loader',
+                    options: {
+                        name: 'images/[hash:8].[name].[ext]',
+                        limit: '8192'
+                    }
+                }]
             }
 
         ]
@@ -74,10 +118,21 @@ module.exports = {
     },
 
     plugins:[
-        new HtmlWebpackPlugin({
-            template: __dirname + "/app/index.tmpl.html"
+        /*
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: Infinity
+        }),*/
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('./dist/dll-manifest.json')//此处路径为上面webpack.config.dll.js中DllPlugin插件中的path
         })
+
     ],//插件
+
+    resolve: {
+        extensions: ['.js', '.jsx', '.css'] //后缀名自动补全
+    },
 
     //使用eval打包源文件模块，在同一个文件中生成干净的完整的source map。
     //这个选项可以在不影响构建速度的前提下生成完整的sourcemap，但是对打包后输出的JS文件的执行具有性能和安全的隐患。
@@ -95,12 +150,34 @@ if (process.env.NODE_ENV === 'production') {
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: '"production"'
+                NODE_ENV: '"production"',
+                BABEL_ENV: JSON.stringify('production')
+            }
+        }),
+        new HtmlWebpackPlugin({
+            //favicon:'./src/images/icon_logo.png', //favicon路径
+            //filename: '../index.html', //生成的html存放路径，相对于 path
+            template: './src/template/index.html', //html模板路径
+            inject: true,
+            hash: true,
+            minify: {//压缩HTML文件
+                removeComments:true,    //移除HTML中的注释
+                collapseWhitespace:true    //删除空白符与换行符
             }
         }),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap : true
         })
         //new ExtractTextPlugin("[name]-[hash].css")
+    ]);
+}else{
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new HtmlWebpackPlugin({
+            //favicon:'./src/images/icon_logo.png', //favicon路径
+            //filename: '../index.html', //生成的html存放路径，相对于 path
+            template: './src/template/index.html', //html模板路径
+            inject: true,
+            hash: true
+        })
     ]);
 }

@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.config.js",
     "test": "mocha",
-    "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --hide-modules",
+    "dll": "cross-env NODE_ENV=production webpack --config ./webpack.config.dll.js  --progress --colors",
+    "build-release": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --hide-modules",
+    "build": "cross-env webpack --config ./webpack.config.js  --progress --hide-modules",
     "predeploy": "npm run build",
     "deploy": "echo deploy!!"
   },
