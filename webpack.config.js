@@ -113,8 +113,8 @@ module.exports = {
             path.join(__dirname, "public"),
             path.join(__dirname, "assets")
         ],
-
-        hot : true,
+        //20170523:打开hot后会导致浏览器上看不到任何内容，但加载却没问题
+        //hot : true,
 
         historyApiFallback: true,//spa使用html5的route mode , 不跳转
         inline: true,//实时刷新
