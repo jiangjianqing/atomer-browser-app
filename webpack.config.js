@@ -16,7 +16,8 @@ module.exports = {
     //2、进出口文件配置
     //entry:__dirname+'/lib/entry.js',//指定的入口文件
     entry: {
-        app: [/*'babel-polyfill',*/path.join(__dirname, "/lib/entry.js")]
+        //app: [/*'babel-polyfill',*/path.join(__dirname, "/lib/entry.js")],
+        app: [/*'babel-polyfill',*/path.join(__dirname, "/src/main.js")]
         //, vendor: [
             //'vue'
             /*
@@ -39,8 +40,11 @@ module.exports = {
     },
     module: {//在配置文件里添加加载器说明，指明每种文件需要什么加载器处理
         rules: [
-            { test: /\.hbs$/, loader: "handlebars-loader" },
-
+            { test: /\.hbs$/, use: "handlebars-loader" },
+            {
+                test: /\.vue$/,
+                use: 'vue-loader'
+            },
             {//20170522:经测试，多个同样的测试放在一起最ok
                 test: /\.js$/,
                 exclude:/node_modules/,
@@ -100,8 +104,10 @@ module.exports = {
     devServer: {//注意：网上很多都有colors属性，但是实际上的webpack2.x已经不支持该属性了
         port:9191,
         contentBase : [//本地服务器所加载的页面所在的目录
-            path.join(__dirname, "./app"),
-            path.join(__dirname, "."), //2017.05.22 保持webpack和webstorm调试index一致的设置项：使都能访问dist目录
+            //path.join(__dirname, "./app"),
+            //path.join(__dirname, "."), //2017.05.22 保持webpack和webstorm调试index一致的设置项：使都能访问dist目录
+            path.join(__dirname, "./dist/dev"),
+            path.join(__dirname, "./dist"),
             path.join(__dirname, "public"),
             path.join(__dirname, "assets")
         ],
