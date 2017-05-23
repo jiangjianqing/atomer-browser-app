@@ -17,7 +17,8 @@ module.exports = {
     //entry:__dirname+'/lib/entry.js',//指定的入口文件
     entry: {
         //app: [/*'babel-polyfill',*/path.join(__dirname, "/lib/entry.js")],
-        app: [/*'babel-polyfill',*/path.join(__dirname, "/src/main.js")]
+        app: [
+            /*'babel-polyfill',*/path.join(__dirname, "/src/main.js")]
         //, vendor: [
             //'vue'
             /*
@@ -26,7 +27,8 @@ module.exports = {
         //]
     },
     output: {//输出
-        publicPath: ".",    //publicPath对HtmlWebpackPlugin有影响
+        //20170523:publicPath的设置对webpack-dev-server的设置有影响,暂时关闭
+        //publicPath: "",    //publicPath对HtmlWebpackPlugin有影响
         path: BUILD_PATH,//输出路径
         //filename: 'webpack-bundle.js'//输出文件名
         filename: '[name].js',  //这里的name指的是entry中的app
