@@ -166,6 +166,7 @@ module.exports = {
             //'vue$': 'vue/dist/vue.esm.js' //从node_modules目录加载，加上这个配置后文件尺寸变大好几倍，考虑到不设置也能用，所以暂时关闭
             //'easyui':  path.resolve('./public/easyui') //重要： 如果要引用本地第三方库，在这里添加
         },
+        //modulesDirectories: ['web_modules', 'node_modules', 'node_modules/VueFrame'],
         extensions: ['.js', '.jsx', '.css'] //后缀名自动补全
     },
 
