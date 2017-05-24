@@ -5,6 +5,7 @@ let Vue = require('vue').default; //20170523 : vue2.x需要这样使用
 let page = require('page');
 let routes = require('./routes');
 //require('easyui/jquery.easyui.min.js');
+//20170524:由于 easyui的使用模式(修改html模板)与组件框架冲突，所以用bootstrap代替
 
 const app = new Vue({
     el: '#app',
