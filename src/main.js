@@ -4,6 +4,7 @@
 let Vue = require('vue').default; //20170523 : vue2.x需要这样使用
 let page = require('page');
 let routes = require('./routes');
+require('easyui/jquery.easyui.min.js');
 
 const app = new Vue({
     el: '#app',

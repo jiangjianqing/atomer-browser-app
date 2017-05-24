@@ -38,6 +38,7 @@ module.exports = {
     // 表示这个依赖项是外部lib，遇到require它不需要编译，
     // 且在浏览器端对应window.React
     externals: {
+        //'jquery' : 'window.jquery',
         'react': 'window.React'
     },
     module: {//在配置文件里添加加载器说明，指明每种文件需要什么加载器处理
@@ -162,7 +163,8 @@ module.exports = {
 
     resolve: {
         alias: {
-            //'vue$': 'vue/dist/vue.esm.js' //加上这个配置后文件尺寸变大好几倍，考虑到不设置也能用，所以暂时关闭
+            //'vue$': 'vue/dist/vue.esm.js' //从node_modules目录加载，加上这个配置后文件尺寸变大好几倍，考虑到不设置也能用，所以暂时关闭
+            //'easyui':  path.resolve('./public/easyui') //重要： 如果要引用本地第三方库，在这里添加
         },
         extensions: ['.js', '.jsx', '.css'] //后缀名自动补全
     },
