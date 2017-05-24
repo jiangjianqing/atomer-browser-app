@@ -161,6 +161,9 @@ module.exports = {
     ],//插件
 
     resolve: {
+        alias: {
+            //'vue$': 'vue/dist/vue.esm.js' //加上这个配置后文件尺寸变大好几倍，考虑到不设置也能用，所以暂时关闭
+        },
         extensions: ['.js', '.jsx', '.css'] //后缀名自动补全
     },
 
