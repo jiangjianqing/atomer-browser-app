@@ -4,7 +4,7 @@
   "description": "skeleton of my browser app",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config ./webpack.config.js",
+    "dev": "npm run build && cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js  --open",
     "test": "mocha",
     "dll": "cross-env NODE_ENV=production webpack --config ./webpack.dll.config.js  --progress --colors",
     "build-release": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --hide-modules",

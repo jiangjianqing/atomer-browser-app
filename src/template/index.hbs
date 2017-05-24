@@ -2,12 +2,28 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>Atomer Browser App</title>
 
+        <!--
         <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
         <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
         <script type="text/javascript" src="jquery.min.js"></script>
         <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+        -->
+
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
         <!-- assets 与webpack.config.js中的publicPath 相关 -->
         {{#each htmlWebpackPlugin.options.dllBundleInfo}}
@@ -17,31 +33,6 @@
     </head>
     <body>
         <div id='app'>
-        </div>
-
-        <h2>Basic Layout</h2>
-        <p>The layout contains north,south,west,east and center regions.</p>
-        <div style="margin:20px 0;"></div>
-        <div class="easyui-layout" style="width:700px;height:350px;">
-            <div data-options="region:'north'" style="height:50px"></div>
-            <div data-options="region:'south',split:true" style="height:50px;"></div>
-            <div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
-            <div data-options="region:'west',split:true" title="West" style="width:100px;"></div>
-            <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-                <table class="easyui-datagrid"
-                       data-options="url:'datagrid_data1.json',method:'get',border:false,singleSelect:true,fit:true,fitColumns:true">
-                    <thead>
-                    <tr>
-                        <th data-options="field:'itemid'" width="80">Item ID</th>
-                        <th data-options="field:'productid'" width="100">Product ID</th>
-                        <th data-options="field:'listprice',align:'right'" width="80">List Price</th>
-                        <th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
-                        <th data-options="field:'attr1'" width="150">Attribute</th>
-                        <th data-options="field:'status',align:'center'" width="60">Status</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
         </div>
     </body>
 
