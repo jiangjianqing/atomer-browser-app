@@ -18,6 +18,6 @@ module.exports = menus;
 
 let Vue = require('vue').default;
 Object.keys(menus).forEach(menu => {
-    const Component = require('../components/' + menus[menu].componentName + '.vue');
+    const Component = require("../components/" + menus[menu].componentName + '.vue');
     Vue.component(menu, Component);
 });
