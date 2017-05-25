@@ -10,14 +10,21 @@
     import AppMain from './app-main.vue';
 
 
-    import menus from './menus';
+    import businessEntires from './business-entries';
 
+    //20170526: welcome是框架自带的，不需要进行初始化
+    businessEntires.unshift({
+        "sn" : -9999,
+        "title": "主页",
+        "name":"welcome",
+        "component-path": "./components/welcome.vue"
+    });
 
     export default {
         data : function(){
             return {
                 currentView : 'welcome',
-                menus : menus
+                menus : businessEntires
             };
         },
         methods:{

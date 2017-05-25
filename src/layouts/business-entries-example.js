@@ -1,7 +1,7 @@
 /**
  * Created by jjq on 5/25/17.
  */
-
+//这是手动生成的样本，演示用
 let menus = {
     'welcome':{
         title: '主页',

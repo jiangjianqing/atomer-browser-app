@@ -30,9 +30,10 @@ function plugin(Vue, options) {
     //Vue自己检测是否已经加载过,以下检测代码无效
     if (plugin.installed) {
         console.log("插件已经加载!");
-        return
+        return;
     }
     console.log("自定义组件正在加载!");
+    Vue.component('welcome',require('./components/welcome.vue'));
     Vue.component(
         'v-link',
         //20170525 : 经测试，以下webpac import的异步加载语法无法使用，但使用require写法可以
@@ -43,7 +44,7 @@ function plugin(Vue, options) {
             // are loaded over Ajax requests.
             require(['./components/VLink.vue'], resolve)
         }
-    )
+    );
     //Vue.directive('e-accordion', require('./accordion'))
     //Vue.directive('e-datagrid', require('./datagrid'))
     //Vue.directive('e-dialog', require('./dialog'))
