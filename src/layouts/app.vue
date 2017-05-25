@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import AppHeader from '../components/app-header.vue';
+    import AppHeader from './app-header.vue';
     import AppMain from './app-main.vue';
 
 
