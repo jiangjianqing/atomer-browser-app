@@ -13,7 +13,9 @@
 
     export default {
         data : function(){
-            return menus;
+            return {
+                menus : menus
+            };
         },
         components: {
             AppHeader, AppMain
