@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <app-header ></app-header>
+        <app-header v-bind:func-menus="menus" v-on:viewchanged="changeView"></app-header>
         <app-main v-bind:menu-name="currentView" ></app-main>
     </div>
 </template>
@@ -16,9 +16,15 @@
     export default {
         data : function(){
             return {
-                currentView : 'welcome'//,
-                //menus : menus
+                currentView : 'welcome',
+                menus : menus
             };
+        },
+        methods:{
+            changeView:function(viewName){
+                this.currentView = viewName;
+                console.log('收到view name : '+viewName);
+            }
         },
         components: {
             AppHeader, AppMain

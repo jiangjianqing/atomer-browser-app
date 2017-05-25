@@ -9,8 +9,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">用户管理</a></li>
-                    <li><a href="#">算法开发</a></li>
+                    <li v-for="item in funcMenus">
+                        <a href="#" v-bind:data-name="item.name" v-on:click.prevent="changeView">{{ item.title }}</a>
+
+                    </li>
                 </ul>
 
 
@@ -22,6 +24,16 @@
 <script>
 
     export default {
-        props : ['funcMenus']
+        props : ['funcMenus'],
+        methods:{
+            changeView: function(event){
+                let viewName = event.target.dataset.name;
+                this.$emit('viewchanged',viewName);
+                console.log('准备 改变view name : '+viewName);
+            }
+        },
+        computed: {
+
+        }
     }
 </script>
