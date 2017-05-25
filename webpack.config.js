@@ -39,6 +39,7 @@ module.exports = {
     // 且在浏览器端对应window.React
     externals: {
         //'jquery' : 'window.jquery',
+        'Router' : 'window.Router',
         'react': 'window.React'
     },
     module: {//在配置文件里添加加载器说明，指明每种文件需要什么加载器处理
