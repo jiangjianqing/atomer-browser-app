@@ -1,24 +1,26 @@
 <template>
-  <div class="app-container">
-     <app-header></app-header>
-  </div>
+    <div class="app-container">
+        <app-header></app-header>
+        <app-main></app-main>
+    </div>
 </template>
 
 <script>
-  import AppHeader from '../components/app-header.vue'
+    import AppHeader from '../components/app-header.vue';
+    import AppMain from './app-main.vue';
 
-  export default {
-    components: {
-        AppHeader
+    export default {
+        components: {
+            AppHeader, AppMain
+        }
     }
-  }
 </script>
 
 <style scoped>
-  .app-container {
-    margin: 0 0;
-    height: inherit;
-    padding: 0 0;
-    background: #f9f7f5;
-  }
+    .app-container {
+        margin: 0 0;
+        height: inherit;
+        padding: 0 0;
+        background: #f9f7f5;
+    }
 </style>
