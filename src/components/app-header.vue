@@ -9,10 +9,12 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li v-for="item in funcMenus">
+                    <template v-for="item in funcMenus">
+                    <li v-bind:class="{active : item.name == currentView}">
                         <a href="#" v-bind:data-name="item.name" v-on:click.prevent="changeView">{{ item.title }}</a>
 
                     </li>
+                    </template>
                 </ul>
 
 
@@ -25,11 +27,15 @@
 
     export default {
         props : ['funcMenus'],
+        data : function () {
+            return {
+                currentView : 'welcome'
+            }
+        },
         methods:{
             changeView: function(event){
-                let viewName = event.target.dataset.name;
-                this.$emit('viewchanged',viewName);
-                console.log('准备 改变view name : '+viewName);
+                this.currentView = event.target.dataset.name;
+                this.$emit('viewchanged',this.currentView);
             }
         },
         computed: {
