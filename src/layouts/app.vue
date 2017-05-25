@@ -1,6 +1,6 @@
 <template>
     <div class="app-container">
-        <app-header></app-header>
+        <app-header func-menus="menus"></app-header>
         <app-main></app-main>
     </div>
 </template>
