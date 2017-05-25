@@ -9,13 +9,14 @@
 <script>
 
     export default {
+        props : [],
         data: function () {
             return {
                 currentView: 'algorithmDev'
             }
         },
         components: {
-            home: require('../components/home.vue'),
+            home: require('../components/welcome.vue'),
             userManage:require('../components/user-manage.vue'),
             algorithmDev:require('../components/algorithm-dev.vue')
         }

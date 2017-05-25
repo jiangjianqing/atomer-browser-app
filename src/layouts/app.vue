@@ -9,7 +9,12 @@
     import AppHeader from '../components/app-header.vue';
     import AppMain from './app-main.vue';
 
+    let menus= require('./menus');
+
     export default {
+        data : function(){
+            return menus;
+        },
         components: {
             AppHeader, AppMain
         }
