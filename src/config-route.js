@@ -2,8 +2,8 @@
  * Created by jjq on 5/25/17.
  */
 let Vue = require('vue').default;
-var VueRouter = require('vue-router');
-
+var VueRouter = require('vue-router').default;
+/*
 var configRouter = {
     '/contract/updateFrame': {
         component: function (resolve, reject) {
@@ -25,21 +25,22 @@ var configRouter = {
         }
     }
 };
+*/
+const Foo = { template: '<div>foo</div>' }
+const Bar = { template: '<div>bar</div>' }
+
+const routes = [
+    { path: '/foo', component: Foo },
+    { path: '/bar', component: Bar }
+];
+
+//Vue.use(VueRouter);
 
 
-Vue.use(VueRouter);
-
-
-var router = new VueRouter({
+module.exports = new VueRouter({
     // history: true,
-    saveScrollPosition: true
+    mode: 'history', //html5History mode
+    //saveScrollPosition: true,
+    routes : routes
 });
 
-router.map(configRouter);
-
-var App = Vue.extend({});
-// var App = Vue.extend(require('./contract/updateFrame'));
-router.start(App, '#app');
-
-// just for debugging
-window.router = router;
