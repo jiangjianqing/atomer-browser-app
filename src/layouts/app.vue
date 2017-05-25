@@ -1,7 +1,7 @@
 <template>
     <div class="app-container">
-        <app-header func-menus="menus"></app-header>
-        <app-main></app-main>
+        <app-header ></app-header>
+        <app-main v-bind:menu-name="currentView" ></app-main>
     </div>
 </template>
 
@@ -9,12 +9,15 @@
     import AppHeader from '../components/app-header.vue';
     import AppMain from './app-main.vue';
 
-    let menus= require('./menus');
+
+    import menus from './menus';
+
 
     export default {
         data : function(){
             return {
-                menus : menus
+                currentView : 'welcome'//,
+                //menus : menus
             };
         },
         components: {

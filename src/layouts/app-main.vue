@@ -9,16 +9,24 @@
 <script>
 
     export default {
-        props : [],
+        props : ['menuName'],
         data: function () {
+            console.log(this.menuName);
             return {
-                currentView: 'algorithmDev'
+                //currentView: 'welcome'  //data属性的优先级比 computed高
             }
         },
+        computed:{
+            currentView : function(){
+                //console.log(this.menuName);
+                return this.menuName;
+            }
+        }
+        /*
         components: {
             home: require('../components/welcome.vue'),
             userManage:require('../components/user-manage.vue'),
             algorithmDev:require('../components/algorithm-dev.vue')
-        }
+        }*/
     }
 </script>
