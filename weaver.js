@@ -4,13 +4,23 @@
 const util = require('util');
 const path = require('path');
 const fs = require('fs');
-let weaver = require('./atom.json');
+
+var jsonFile = './atom.json';
+if (process.argv.length > 1){
+    jsonFile = process.argv[2];
+    if (!fs.existsSync(jsonFile)){
+        console.log(`[${jsonFile}]文件不存在`);
+        process.exit(1);
+    }
+}
+let weaver = require(jsonFile);
 if (!util.isArray(weaver["business-entries"])){
+    console.log(`指定的 [${jsonFile}]不包含business-entries`);
     return;
 }
 
 const entries = weaver["business-entries"].sort(function(a,b){
-    return a.sn>b.sn;
+    return a.sn > b.sn;
 });
 
 let entryFileName = path.resolve('./src/layouts/business-entries.js');
