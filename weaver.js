@@ -44,8 +44,8 @@ function outputVueComponentRegist(out, entries){
     out.write("let Vue = require('vue').default;\n\n");
     entries.forEach(function(entry,idx){
         let comPath = entry["component-path"];
-        if (!comPath.match(/^@/)){
-            comPath = path.resolve('./src/'+comPath);
+        if (!comPath.match(/^@/)){  //这里需要注意：使用本地目录后可能会导致在不同pc上的不兼容，所以每次新获取后都要重新weave一下
+            comPath = path.resolve('./src/' + comPath);
         }
         out.write(`Vue.component('${entry.name}', require('${comPath}'));\n`);
 

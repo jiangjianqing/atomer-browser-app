@@ -26,6 +26,6 @@ module.exports = entries;
 
 let Vue = require('vue').default;
 
-Vue.component('algorithm-dev', require('/home/cz_jjq/git/js/atomer-browser-app/src/components/algorithm-dev.vue'));
-Vue.component('user-manage', require('/home/cz_jjq/git/js/atomer-browser-app/src/components/user-manage.vue'));
-Vue.component('project-dev', require('/home/cz_jjq/git/js/atomer-browser-app/src/components/project-dev'));
+Vue.component('algorithm-dev', require('/home/jjq/git/js/atomer-browser-app/src/components/algorithm-dev.vue'));
+Vue.component('user-manage', require('/home/jjq/git/js/atomer-browser-app/src/components/user-manage.vue'));
+Vue.component('project-dev', require('/home/jjq/git/js/atomer-browser-app/src/components/project-dev'));
