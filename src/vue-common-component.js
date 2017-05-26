@@ -34,6 +34,7 @@ function plugin(Vue, options) {
     }
     console.log("自定义组件正在加载!");
     Vue.component('welcome',require('./components/welcome.vue'));
+    Vue.component('toolbar',require('./components/common/toolbar.vue'));
     Vue.component(
         'v-link',
         //20170525 : 经测试，以下webpac import的异步加载语法无法使用，但使用require写法可以

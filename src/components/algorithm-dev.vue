@@ -1,5 +1,8 @@
 <template>
-    <div>算法开发</div>
+    <div>
+        <toolbar></toolbar>
+        算法开发<input type="text"/>
+    </div>
 </template>
 
 <script>
