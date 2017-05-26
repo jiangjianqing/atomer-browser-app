@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 
 var jsonFile = './atom.json';
-if (process.argv.length > 1){
+if (process.argv.length > 2){
     jsonFile = process.argv[2];
     if (!fs.existsSync(jsonFile)){
         console.log(`[${jsonFile}]文件不存在`);

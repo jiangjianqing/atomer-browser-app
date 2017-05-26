@@ -38,7 +38,7 @@ module.exports = {
     // 表示这个依赖项是外部lib，遇到require它不需要编译，
     // 且在浏览器端对应window.React
     externals: {
-        //'jquery' : 'window.jquery',
+        'jquery' : 'window.jQuery',
         'Router' : 'window.Router',
         'react': 'window.React'
     },

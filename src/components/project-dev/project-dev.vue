@@ -1,6 +1,7 @@
 <template>
-    <div>请选择需要打包的模块：<br><br>
-        <div>
+    <div>
+        <div style="margin:0 auto; width:400px;">
+            请选择需要打包的模块：<br><br>
             <template v-for="item in businessEntries">
                 <input type="checkbox" v-bind:value="item.name" v-model="checkedNames">{{item.title}}<br><br>
             </template>
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+    let $ = require('jquery');
     let modules= {
         "business-entries" :[
             {
@@ -63,7 +65,17 @@
                         }
                     })
                 });
-                console.log(JSON.stringify(selectedModules,null,'\t'));
+                $.ajax('http://localhost:9090/servlet-demo/WeaverServlet',{
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(selectedModules),
+                    dataType: "text",
+                    processData:false
+                }).then(function(){
+                    console.log('发送成功！')
+                },function(){
+                    console.error('发送失败!')
+                })
             }
         }
     }
