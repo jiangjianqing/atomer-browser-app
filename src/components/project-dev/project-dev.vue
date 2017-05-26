@@ -14,7 +14,7 @@
 </template>
 
 <script>
-    let $ = require('jquery');
+    let axios = require('axios');
     let modules= {
         "business-entries" :[
             {
@@ -65,12 +65,11 @@
                         }
                     })
                 });
-                $.ajax('http://localhost:9090/servlet-demo/WeaverServlet',{
-                    type: "POST",
-                    contentType: "application/json; charset=utf-8",
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:9090/servlet-demo/WeaverServlet',
                     data: JSON.stringify(selectedModules),
-                    dataType: "text",
-                    processData:false
+                    responseType: 'text'
                 }).then(function(){
                     console.log('发送成功！')
                 },function(){
