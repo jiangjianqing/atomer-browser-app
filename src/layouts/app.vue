@@ -1,13 +1,13 @@
 <template>
     <div class="app-container">
-        <app-header v-bind:func-menus="menus" v-on:viewchanged="changeView"></app-header>
-        <app-main v-bind:menu-name="currentView" ></app-main>
+        <app-nav v-bind:func-menus="menus" v-on:viewchanged="changeView"></app-nav>
+        <app-view v-bind:menu-name="currentView" ></app-view>
     </div>
 </template>
 
 <script>
-    import AppHeader from './app-header.vue';
-    import AppMain from './app-main.vue';
+    import AppNav from './app-nav.vue';
+    import AppView from './app-view.vue';
 
 
     import businessEntires from './business-entries';
@@ -34,7 +34,7 @@
             }
         },
         components: {
-            AppHeader, AppMain
+            AppNav, AppView
         }
     }
 </script>
