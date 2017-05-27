@@ -1,6 +1,10 @@
 <template>
     <keep-alive>
         <component v-bind:is="currentView">
+            <!-- implement in sub component
+            <app-sidebar></app-sidebar>
+            <app-content></app-content>
+            -->
             <!-- component changes when vm.currentView changes! -->
         </component>
     </keep-alive>
