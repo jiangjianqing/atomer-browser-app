@@ -13,6 +13,8 @@ Vue.use(vueComponents);
 
 //var router = require('./config-route');
 
+//不包含template的时候，会替换el的外部元素
+//compile el's outerHtml as template
 const app = new Vue({
     //router : router,
     el: '#app',
