@@ -2,12 +2,14 @@
     <div class="app-container">
         <app-nav v-bind:func-menus="menus" v-on:viewchanged="changeView"></app-nav>
         <app-view v-bind:menu-name="currentView" ></app-view>
+        <app-dialog></app-dialog>
     </div>
 </template>
 
 <script>
     import AppNav from './app-nav.vue';
     import AppView from './app-view.vue';
+    import AppDialog from '../components/common/dialog.vue';
 
 
     import businessEntires from './business-entries';
@@ -34,7 +36,7 @@
             }
         },
         components: {
-            AppNav, AppView
+            AppNav, AppView, AppDialog
         }
     }
 </script>
