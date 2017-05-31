@@ -8,6 +8,20 @@
 
             <button class="btn btn-primary" v-on:click="rebuild">重新打包</button>
 
+            <div>
+                <pre>
+                    继承
+流程
+总体业务设计
+
+第一步 建模系统配置
+界面、步骤、算法  ：
+
+通讯配置、网口配置、相机配置：
+
+所有的建模是否应该有产品信息界面
+                </pre>
+            </div>
         </div>
 
     </div>
