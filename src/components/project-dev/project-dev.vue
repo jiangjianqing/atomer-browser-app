@@ -15,31 +15,7 @@
 
 <script>
     let axios = require('axios');
-    let modules= {
-        "business-entries" :[
-            {
-                "sn" : 2,
-                "title": "用户管理",
-                "selected" : true,
-                "name":"user-manage",
-                "component-path": "./components/user-manage.vue"
-            },
-            {
-                "sn" : 1,
-                "title": "算法开发",
-                "selected" : true,
-                "name":"algorithm-dev",
-                "component-path": "./components/algorithm-dev.vue"
-            },
-            {
-                "sn" : 3,
-                "title": "项目快速开发",
-                "selected" : true,
-                "name":"project-dev",
-                "component-path": "./components/project-dev"
-            }
-        ]
-    };
+    let modules= require('../../../atom.json');
 
     export default {
         data : function(){

@@ -21,6 +21,12 @@ let entries = [
 	"name": "project-dev",
 	"component-path": "./components/project-dev"
 },
+	{
+	"sn": 4,
+	"title": "设备管理",
+	"name": "device-manager",
+	"component-path": "@focusight/device-manager"
+},
 ];
 module.exports = entries;
 
@@ -29,3 +35,4 @@ let Vue = require('vue').default;
 Vue.component('algorithm-dev', require('/home/jjq/git/js/atomer-browser-app/src/components/algorithm-dev.vue'));
 Vue.component('user-manage', require('/home/jjq/git/js/atomer-browser-app/src/components/user-manage.vue'));
 Vue.component('project-dev', require('/home/jjq/git/js/atomer-browser-app/src/components/project-dev'));
+Vue.component('device-manager', require('@focusight/device-manager'));
