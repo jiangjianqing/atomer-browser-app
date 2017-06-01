@@ -43,8 +43,7 @@ module.exports = {
     // 且在浏览器端对应window.React
     externals: {
         'jquery' : 'window.jQuery',
-        'router' : 'window.Router',
-        'react': 'window.React'
+        'router' : 'window.Router'
     },
     module: {//在配置文件里添加加载器说明，指明每种文件需要什么加载器处理
         rules: [
@@ -60,8 +59,8 @@ module.exports = {
                     {//es2015处理
                         loader : 'babel-loader'
                     },
-                    //重要：结合使用webpack和browserify的transform
-                    "transform-loader?brfs",
+                    //重要：结合使用webpack和browserify的transform，但最好不要使用browserify的transform
+                    //"transform-loader?brfs",  //20170601  加入react jsx  处理后，出现SyntaxError: Unexpected token (5:16)
                     "transform-loader?browserify-shim"
                 ]
             },
