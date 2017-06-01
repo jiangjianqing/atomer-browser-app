@@ -43,7 +43,7 @@ module.exports = {
     // 且在浏览器端对应window.React
     externals: {
         'jquery' : 'window.jQuery',
-        'Router' : 'window.Router',
+        'router' : 'window.Router',
         'react': 'window.React'
     },
     module: {//在配置文件里添加加载器说明，指明每种文件需要什么加载器处理
@@ -54,7 +54,7 @@ module.exports = {
                 use: 'vue-loader'
             },
             {//20170522:经测试，多个同样的测试放在一起最ok
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude:/node_modules/,
                 use : [ //多个loader一起使用
                     {//es2015处理
