@@ -2,7 +2,10 @@ var webpack = require('webpack');
 var path = require('path');
 var AssetsPlugin = require('assets-webpack-plugin');
 
-var BUILD_PATH = path.resolve('./build');
+var package = require("./package.json");
+
+var BUILD_PATH = path.resolve(package.output? package.output : './build');
+
 module.exports = {
     entry: {
         vender: [//公共组件
@@ -15,7 +18,8 @@ module.exports = {
             "vue",
             "q",
             "axios",
-            "handlebars"
+            "handlebars",
+            "react"
             /*
             'react',
             'react-dom',

@@ -5,7 +5,9 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var BUILD_OUTPUT = './build';
+var package = require("./package.json");
+
+var BUILD_OUTPUT = path.resolve(package.output? package.output : './build');
 
 //dllBundleInfo是在webpack.dll中生成，记录了所有bundle的文件信息，用于向index.hbs中注入
 var dllBundleInfo = require(BUILD_OUTPUT+"/dll-bundle-info.json");
