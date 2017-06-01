@@ -14,8 +14,8 @@ let Router = require('router'); //director router的导入方式
 
 //require('./config-route');
 let routes = {
-    "/" : ()=>require("./vue-main")//,
-    //"/react" : ()=>require("./react-main.jsx")
+    "/" : ()=>require("./vue-main"),
+    "/react" : ()=>require("./react-main.jsx")
 };
 
 
@@ -32,7 +32,19 @@ Object.keys(routes).forEach(route => {
 });
 
 
-let notFuncCall = ()=>app.ViewComponent = require('./pages/404.vue');
+let notFuncCall = function(){
+    new Vue({
+        //router : router,
+        el: '#app',
+
+        render: function (h) {
+            //20170601晚上,引用vue文件，会出现[Vue warn]: Failed to mount component: template or render function not defined
+            //极有可能是vueify的锅
+            //return h(require('./components/common/toolbar.vue'));
+            return h('h1', 'route notfound!!!');
+        }
+    })
+};
 router.configure({
     html5history : true,
     notfound : notFuncCall //not found
@@ -40,15 +52,19 @@ router.configure({
 page('*', notFuncCall); //not round
 //page();  //20170601 关闭page router
 
-//router.init(); //20170525 director的路由会重新向服务器请求数据，还是用page
+router.init(); //20170525 director的路由会重新向服务器请求数据，page则不会，但director用来做多页很好
 
-console.log(Vue);
+/*
+ // browserify vue test section 20170601
 const app = new Vue({
     //router : router,
     el: '#app',
 
     render: function (h) {
-        //return h(require('./components/common/toolbar.vue'));//20170601晚上,引用vue文件，会出现[Vue warn]: Failed to mount component: template or render function not defined
+        //20170601晚上,引用vue文件，会出现[Vue warn]: Failed to mount component: template or render function not defined
+        //极有可能是vueify的锅
+        //return h(require('./components/common/toolbar.vue'));
         return h('h1', 'hello world');
     }
 });
+*/

@@ -167,8 +167,8 @@ module.exports = {
 
     resolve: {
         alias: {
-            'service-manager' : path.resolve('./lib/services/service-manager.js')
-            //'vue$': 'vue/dist/vue.esm.js' //从node_modules目录加载，加上这个配置后文件尺寸变大好几倍，考虑到不设置也能用，所以暂时关闭
+            'service-manager' : path.resolve('./lib/services/service-manager.js'),
+            'vue': path.resolve(__dirname, './node_modules/vue/dist/vue.common.js') //从node_modules目录加载，加上这个配置后文件尺寸变大好几倍，考虑到不设置也能用，所以暂时关闭
             //'components': path.resolve(__dirname, '../src/components'),
             //'easyui':  path.resolve('./public/easyui') //重要： 如果要引用本地第三方库，在这里添加
         },

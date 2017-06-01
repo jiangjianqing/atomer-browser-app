@@ -17,7 +17,9 @@ var paths = {
     scripts: ['client/js/**/*.coffee', '!client/external/**/*.coffee'],
     images: 'client/img/**/*'
 };
-
+//20170601 非常重要：transform的顺序有严格要求,babelify 一定要放在最前面,否则会有问题，详细见package.json[transform]
+//20170601 vueify存在问题,require('xxx.vue')时会出现[Vue warn]: Failed to mount component: template or render function not defined
+//20170601 暂时性结论,browserify目前不适合对.vue文件进行bundle操作,webpack更合适,react目前无问题
 gulp.task("build", function(){
     var b = browserify(browserifyOpts);
     //20170520：还没找到在package.json中放requre的格式

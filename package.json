@@ -59,10 +59,10 @@
       "handlebars"
     ],
     "transform": [
-      "aliasify",
+      "babelify",
       "vueify",
       "reactify",
-      "babelify",
+      "aliasify",
       "brfs",
       "browserify-shim"
     ]
