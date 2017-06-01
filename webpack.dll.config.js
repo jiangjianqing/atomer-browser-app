@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var AssetsPlugin = require('assets-webpack-plugin');
 
-var BUILD_PATH = path.resolve('./dist');
+var BUILD_PATH = path.resolve('./build');
 module.exports = {
     entry: {
         vender: [//公共组件
@@ -83,7 +83,7 @@ module.exports = {
             }
         }),
         new webpack.DllPlugin({
-            path: path.join(__dirname, 'dist/dll-manifest.json'),
+            path: path.resolve(BUILD_PATH+'/dll-manifest.json'),
             name: '[name]',
             context: __dirname
         }),

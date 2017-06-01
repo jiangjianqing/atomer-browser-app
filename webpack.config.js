@@ -5,12 +5,14 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var BUILD_OUTPUT = './build';
+
 //dllBundleInfo是在webpack.dll中生成，记录了所有bundle的文件信息，用于向index.hbs中注入
-var dllBundleInfo = require("./dist/dll-bundle-info.json");
+var dllBundleInfo = require(BUILD_OUTPUT+"/dll-bundle-info.json");
 
 var __DEV__ = !(process.env.NODE_ENV === 'production');
 
-var BUILD_PATH = __DEV__ ? path.resolve('./dist/dev') : path.resolve('./dist/release');
+var BUILD_PATH = __DEV__ ? path.resolve(BUILD_OUTPUT+'/dev') : path.resolve(BUILD_OUTPUT+'/release');
 
 module.exports = {
     //2、进出口文件配置
@@ -110,8 +112,8 @@ module.exports = {
         contentBase : [//本地服务器所加载的页面所在的目录
             //path.join(__dirname, "./app"),
             //path.join(__dirname, "."), //2017.05.22 保持webpack和webstorm调试index一致的设置项：使都能访问dist目录
-            path.join(__dirname, "./dist/dev"),
-            path.join(__dirname, "./dist"),
+            BUILD_PATH,
+            path.resolve(BUILD_OUTPUT),
             path.join(__dirname, "public"),
             path.join(__dirname, "assets")
         ],
@@ -140,7 +142,7 @@ module.exports = {
         }),*/
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require('./dist/dll-manifest.json')//此处路径为上面webpack.config.dll.js中DllPlugin插件中的path
+            manifest: require(BUILD_OUTPUT+'/dll-manifest.json')//此处路径为上面webpack.config.dll.js中DllPlugin插件中的path
         }),
         new HtmlWebpackPlugin({
             //favicon:'./src/images/icon_logo.png', //favicon路径
