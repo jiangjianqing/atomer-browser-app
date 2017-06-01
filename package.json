@@ -35,6 +35,12 @@
     "jquery": "global:jQuery",
     "router": "global:Router"
   },
+  "aliasify": {
+    "aliases": {
+      "vue":"./node_modules/vue/dist/vue.common.js"
+    },
+    "verbose": false
+  },
   "browserify": {
     "debug": true,
     "entries": [
@@ -53,8 +59,10 @@
       "handlebars"
     ],
     "transform": [
-      "babelify",
+      "aliasify",
       "vueify",
+      "reactify",
+      "babelify",
       "brfs",
       "browserify-shim"
     ]
@@ -71,6 +79,7 @@
     "vue-router": "^2.5.3"
   },
   "devDependencies": {
+    "aliasify": "^2.1.0",
     "assets-webpack-plugin": "^3.5.1",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
@@ -100,6 +109,7 @@
     "karma-mocha": "^1.3.0",
     "karma-mocha-reporter": "^2.2.3",
     "mocha": "^3.2.0",
+    "reactify": "^1.1.1",
     "transform-loader": "^0.2.4",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

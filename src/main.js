@@ -1,7 +1,7 @@
 /**
  * Created by jjq on 5/23/17.
  */
-let Vue = require('vue').default; //20170523 : vue2.x需要这样使用
+let Vue = require('vue'); //20170523 : vue2.x需要这样使用
 //20170525 重要: page和director都是路由组件,page的介绍中可以学到一些route知识,director可以动态定义路由(Adhoc Routing 和 Scoped Routing)，各有优缺点
 //20170525 :经过测试 ,director 1.2.6在使用时不会拦截页面向服务器请求数据，暂时还是用page
 //When developing large client-side or server-side applications it is not always possible to define routes in one location.
@@ -14,8 +14,8 @@ let Router = require('router'); //director router的导入方式
 
 //require('./config-route');
 let routes = {
-    "/" : ()=>require("./vue-main"),
-    "/react" : ()=>require("./react-main.jsx")
+    "/" : ()=>require("./vue-main")//,
+    //"/react" : ()=>require("./react-main.jsx")
 };
 
 
@@ -40,4 +40,15 @@ router.configure({
 page('*', notFuncCall); //not round
 //page();  //20170601 关闭page router
 
-router.init(); //20170525 director的路由会重新向服务器请求数据，还是用page
+//router.init(); //20170525 director的路由会重新向服务器请求数据，还是用page
+
+console.log(Vue);
+const app = new Vue({
+    //router : router,
+    el: '#app',
+
+    render: function (h) {
+        //return h(require('./components/common/toolbar.vue'));//20170601晚上,引用vue文件，会出现[Vue warn]: Failed to mount component: template or render function not defined
+        return h('h1', 'hello world');
+    }
+});
