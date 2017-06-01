@@ -1,3 +1,24 @@
+#browserify和webpack
+browserify属于比较旧的，标记为deprecated，
+且当前案例中对.vue的支持有问题（应该是vueify的锅），react可以正常使用。
+以下为适合browserify的脚本
+```json
+{
+  "scripts": {
+        "watchify": "watchify -vd -p browserify-hmr -e src/main.js -o dist/build.js",
+        "serve": "http-server -o -s -c 1 -a localhost",
+        "dev": "npm-run-all --parallel watchify serve",
+        "build": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > dist/build.js"
+    }
+}
+```
+
+
+webpack2当前推荐使用。
+
+有时间会增加rollup的配置。
+
+
 # atomer-browser-app
 the skeleton of my browser app
 

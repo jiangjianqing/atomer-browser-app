@@ -54,6 +54,8 @@ page('*', notFuncCall); //not round
 
 router.init(); //20170525 director的路由会重新向服务器请求数据，page则不会，但director用来做多页很好
 
+//使用browserify是router
+
 /*
  // browserify vue test section 20170601
 const app = new Vue({
