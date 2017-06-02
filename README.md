@@ -52,3 +52,6 @@ mocha则集成进命令行 -- 通过npm test 启动
 browserify中使用babelify   transform
 webpack中使用babel-loader
 mocha中使用参数配置直接调用babel
+
+##更新dependencies
+npm outdated 查出哪些有更新
