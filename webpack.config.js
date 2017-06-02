@@ -58,10 +58,10 @@ module.exports = {
                 use : [ //多个loader一起使用
                     {//es2015处理
                         loader : 'babel-loader'
-                    },
+                    }//,
                     //重要：结合使用webpack和browserify的transform，但最好不要使用browserify的transform
                     //"transform-loader?brfs",  //20170601  加入react jsx  处理后，出现SyntaxError: Unexpected token (5:16)
-                    "transform-loader?browserify-shim"
+                    //"transform-loader?browserify-shim"
                 ]
             },
              //20170522 暂时都放在上面同一个loader中测试一下是否可行
