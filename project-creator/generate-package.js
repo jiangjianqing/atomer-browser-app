@@ -14,7 +14,7 @@ let generateHbsObj = function(atomConfig){
     ret.name = atomConfig.name;
     ret.version = atomConfig.version;
     ret[atomConfig.builder] = true;
-    var fwSupportList = ["page" , "react" , "vue" ];
+    var fwSupportList = ["page" , "director" , "react" , "vue" ];
     fwSupportList.forEach(function(fw){
         if (fw in atomConfig.frameworks){
             ret[fw] = true;

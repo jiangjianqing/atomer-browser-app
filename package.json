@@ -28,9 +28,6 @@
     "url": "https://github.com/jiangjianqing/atomer-browser-app/issues"
   },
   "homepage": "https://github.com/jiangjianqing/atomer-browser-app#readme",
-  "browser": {
-    "jquery": "./vendor/jquery-3.2.1.min.js"
-  },
   "browserify-shim": {
     "jquery": "global:jQuery",
     "router": "global:Router"
