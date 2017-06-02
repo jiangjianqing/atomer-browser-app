@@ -5,16 +5,16 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var package = require("./package.json");
+var pkg = require("./package.json");
 
-var BUILD_OUTPUT = path.resolve(package.output? package.output : './build');
+var BUILD_OUTPUT = path.resolve(pkg.output ? pkg.output : './build');
 
 //dllBundleInfo是在webpack.dll中生成，记录了所有bundle的文件信息，用于向index.hbs中注入
-var dllBundleInfo = require(BUILD_OUTPUT+"/dll-bundle-info.json");
+var dllBundleInfo = require(BUILD_OUTPUT + "/dll-bundle-info.json");
 
 var __DEV__ = !(process.env.NODE_ENV === 'production');
 
-var BUILD_PATH = __DEV__ ? path.resolve(BUILD_OUTPUT+'/dev') : path.resolve(BUILD_OUTPUT+'/release');
+var BUILD_PATH = __DEV__ ? path.resolve(BUILD_OUTPUT + '/dev') : path.resolve(BUILD_OUTPUT + '/release');
 
 module.exports = {
     //2、进出口文件配置
@@ -143,7 +143,7 @@ module.exports = {
         }),*/
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require(BUILD_OUTPUT+'/dll-manifest.json')//此处路径为上面webpack.config.dll.js中DllPlugin插件中的path
+            manifest: require(BUILD_OUTPUT + '/dll-manifest.json')//此处路径为上面webpack.config.dll.js中DllPlugin插件中的path
         }),
         new HtmlWebpackPlugin({
             //favicon:'./src/images/icon_logo.png', //favicon路径
