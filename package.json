@@ -99,6 +99,7 @@
     "eslint": "^3.19.0",
     "eslint-config-atomer": "latest",
     "eslint-plugin-flow-vars": "^0.5.0",
+    "eslint-plugin-flowtype": "^2.34.0",
     "eslint-plugin-react": "^7.0.1",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^2.6.0",
