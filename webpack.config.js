@@ -115,7 +115,7 @@ module.exports = {
             //path.join(__dirname, "."), //2017.05.22 保持webpack和webstorm调试index一致的设置项：使都能访问dist目录
             BUILD_PATH,
             path.resolve(BUILD_OUTPUT),
-            path.join(__dirname, "public"),
+            path.resolve(__dirname), //将当前目录放进去就可以直接访问
             path.join(__dirname, "assets")
         ],
         //20170523:打开hot后会导致浏览器上看不到任何内容，但加载却没问题

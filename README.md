@@ -54,4 +54,13 @@ webpack中使用babel-loader
 mocha中使用参数配置直接调用babel
 
 ##更新dependencies
-npm outdated 查出哪些有更新
+```shell
+npm outdated #查出哪些有更新
+```
+
+
+##创建App （根据配置复制必要的文件）
+```shell
+node create-app-prj.js ../atomer-vistion-app/
+```
+

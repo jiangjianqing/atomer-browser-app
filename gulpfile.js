@@ -3,7 +3,7 @@
  */
 var gulp = require('gulp');
 var browserify = require('browserify');
-var package = require('./package.json');
+var pkg = require('./package.json');
 
 //解决browserify + gulp 的注意点 ： Stream 转换
 //vinyl-source-stream + vinyl-buffer
@@ -11,7 +11,7 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var sourcemaps = require("gulp-sourcemaps");
 
-var browserifyOpts = package.browserify || {};
+var browserifyOpts = pkg.browserify || {};
 
 var paths = {
     scripts: ['client/js/**/*.coffee', '!client/external/**/*.coffee'],
@@ -32,7 +32,7 @@ gulp.task("build", function(){
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(sourcemaps.write("."))
         //.pipe(uglify()) // now gulp-uglify works
-        .pipe(gulp.dest("./dist"));
+        .pipe(gulp.dest(pkg.output));
 
 
     /*
