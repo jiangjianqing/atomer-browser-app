@@ -2,7 +2,7 @@
  * Created by jjq on 6/2/17.
  */
 
-var creater = require('./app-creator');
+var creater = require('./project-creator');
 let fs = require('fs');
 
 if(process.argv.length < 3){
