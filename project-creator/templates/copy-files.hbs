@@ -3,11 +3,15 @@
     "webpack.config.js",
     "webpack.dll.config.js",
 {{/if}}
+{{#if browserify}}
+    ".jshintrc",
+    "gulpfile.js",
+    "test-visual/**/*",
+{{/if}}
     ".babelrc",
     ".gitignore",
     ".eslintrc.js",
     "karma.conf.js",
-    "src/main.js",
     "src/template/*",
     "assets/**/*",
     "test/**/*"
