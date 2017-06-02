@@ -1,26 +1,10 @@
 #browserify和webpack
 browserify属于比较旧的，标记为deprecated，
 且当前案例中对.vue的支持有问题（应该是vueify的锅），react可以正常使用。
-以下为适合browserify的脚本
-```json
-{
-  "scripts": {
-        "watchify": "watchify -vd -p browserify-hmr -e src/main.js -o dist/build.js",
-        "serve": "http-server -o -s -c 1 -a localhost",
-        "dev": "npm-run-all --parallel watchify serve",
-        "build": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > dist/build.js"
-    }
-}
-```
-
 
 webpack2当前推荐使用。
 
 有时间会增加rollup的配置。
-
-
-# atomer-browser-app
-the skeleton of my browser app
 
 ##q可以同时用于node和browser环境,所以使用
 https://www.npmjs.com/package/q
@@ -64,3 +48,9 @@ npm outdated #查出哪些有更新
 node create-prj.js ../atomer-vistion-app/
 ```
 
+##使用watchify出现错误:watch  xx/xx/events.js ENOSPC
+原因是：主要是因为gulp的watch需要监听很多文件的改动,但是fedora、ubuntu系统的文件句柄其实是有限制的,因此可以使用以下命令
+```shell
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+```
