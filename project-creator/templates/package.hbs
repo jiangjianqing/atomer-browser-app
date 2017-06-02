@@ -6,7 +6,7 @@
   "scripts": {
     {{#if browserify}}
     "watch": "watchify src/main.js -o build/common-bundle.js --debug ",
-    "serve": "http-server -o -s -c 1 -a localhost",
+    "serve": "echo 'http-server -o -s -c 1 -a localhost'",
     "dev": "npm-run-all --parallel watch serve",
     "build": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > build/common-bundle.js",
     {{/if}}
@@ -74,7 +74,6 @@
   "devDependencies": {
     {{#if browserify}}
     "npm-run-all": "latest",
-    "http-server": "latest",
     "envify": "latest",
     "aliasify": "latest",
     "babelify": "latest",
