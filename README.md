@@ -59,8 +59,8 @@ npm outdated #查出哪些有更新
 ```
 
 
-##创建App （根据配置复制必要的文件）
+##初始化一个项目目录 （根据配置复制必要的文件）
 ```shell
-node create-app-prj.js ../atomer-vistion-app/
+node create-prj.js ../atomer-vistion-app/
 ```
 
