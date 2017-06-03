@@ -54,3 +54,27 @@ node create-prj.js ../atomer-vistion-app/
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 ```
+
+
+#检查nodejs对es标准的兼容程度
+npm -g install es-checker
+命令行执行：es-checker
+
+
+#如果要使用babel命令行，则需要安装babel-cli
+npm -g  install babel-cli
+
+#执行以下命令测试babel的支持能力
+babel-node src/test.js
+
+# 转码结果输出到标准输出
+$ babel example.js
+
+# -s 参数生成source map文件
+$ babel src -d lib -s
+
+# 使用 -w 参数，这个命令参数指定的是watch，每次code目录的文件修改后都会触发babel命令的再次执行。
+babel -w code/ -d build/
+
+#将src转码到dist
+npm run build
