@@ -25,7 +25,7 @@ class AppContainer extends React.Component {
             <div className="container-fluid">
                 <div className="row">
                     <Sidebar currentComponent={this.state.currentComponent} onComponentChange={this.handleComponentChange}></Sidebar>
-                    <AppMain></AppMain>
+                    <AppMain currentComponent={this.state.currentComponent}></AppMain>
                 </div>
             </div>
         );
