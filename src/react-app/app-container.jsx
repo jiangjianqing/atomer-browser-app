@@ -5,16 +5,26 @@ import AppMain from './app-main';
 class AppContainer extends React.Component {
     constructor(props){
         super(props);
+
+        this.handleComponentChange = this.handleComponentChange.bind(this);
+
+        //Lifting State Up
         this.state = {
-            activatedItem : 'overview'
+            currentComponent : 'overview'
         }
+    }
+
+    handleComponentChange(newComponent){
+        this.setState({
+            currentComponent : newComponent
+        })
     }
 
     render() {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <Sidebar activatedItem={this.state.activatedItem}></Sidebar>
+                    <Sidebar currentComponent={this.state.currentComponent} onComponentChange={this.handleComponentChange}></Sidebar>
                     <AppMain></AppMain>
                 </div>
             </div>
