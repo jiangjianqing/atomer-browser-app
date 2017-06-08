@@ -34,13 +34,18 @@ if (!fs.existsSync(appPath)){
 }
 
 var ret = creater.generatePackage(appPath);
+let hbsContext = ret.hbsContext;
 if (ret.isPkgExist){
-    console.log(colors.warn("Warning:Dest package.json is exist, just update it ,other operations are ignored!"));
+    console.log(colors.warn("Warning:Dest package.json is exist, just update it ,some operations will be  ignored!"));
 }else{
-    let hbsContext = ret.hbsContext;
-    creater.copyFiles(appPath, hbsContext);
-    creater.generateTravis(appPath, hbsContext);
+    if (!hbsContext.private){
+        creater.generateTravis(appPath, hbsContext);
+    }
 }
+
+hbsContext.isPkgExist = ret.isPkgExist;
+creater.copyFiles(appPath, hbsContext);
+
 
 
 

@@ -6,16 +6,19 @@
 {{#if browserify}}
     ".jshintrc",
     "gulpfile.js",
+{{/if}}
+{{#if isPkgExist}}
+{{else}}
+    "src/template/*",
+    "assets/**/*",
+    "test-babel/**/*",
     "test-visual/**/*",
+    "resources/**/*",
+    "test/**/*",
 {{/if}}
     ".flowconfig",
     ".babelrc",
     ".gitignore",
     ".eslintrc.js",
-    "karma.conf.js",
-    "src/template/*",
-    "assets/**/*",
-    "test-babel/**/*",
-    "resources/**/*",
-    "test/**/*"
+    "karma.conf.js"
 ]
