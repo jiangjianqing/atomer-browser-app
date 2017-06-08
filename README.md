@@ -78,3 +78,6 @@ babel -w code/ -d build/
 
 #将src转码到dist
 npm run build
+
+#代码静态检查
+flow init  //用于生成.flowconfig文件
