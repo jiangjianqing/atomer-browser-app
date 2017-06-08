@@ -36,6 +36,7 @@ if (!fs.existsSync(appPath)){
 var ret = creater.generatePackage(appPath);
 let hbsContext = ret.hbsContext;
 creater.copyFiles(appPath, hbsContext);
+creater.generateTravis(appPath, hbsContext);
 
 
 
