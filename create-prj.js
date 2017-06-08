@@ -1,12 +1,27 @@
 /**
  * Created by jjq on 6/2/17.
  */
+var colors = require('colors');
+
+// set theme
+colors.setTheme({
+    silly: 'rainbow',
+    input: 'grey',
+    verbose: 'cyan',
+    prompt: 'grey',
+    info: 'green',
+    data: 'grey',
+    help: 'cyan',
+    warn: 'yellow',
+    debug: 'blue',
+    error: 'red'
+});
 
 var creater = require('./project-creator');
 let fs = require('fs');
 
 if(process.argv.length < 3){
-    console.log("Please input a target app path first! (base on cwd)");
+    console.log(colors.error("Please input a target app path first! (base on cwd)"));
     process.exit(-1)
 }
 
