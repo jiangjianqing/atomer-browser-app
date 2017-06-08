@@ -20,7 +20,7 @@ let entries = [
 	"title": "项目快速开发",
 	"name": "project-dev",
 	"component-path": "./components/project-dev"
-},
+}
 ];
 module.exports = entries;
 

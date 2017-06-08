@@ -81,3 +81,11 @@ npm run build
 
 #代码静态检查
 flow init  //用于生成.flowconfig文件
+
+#npm-run-all
+
+npm-s and npm-p are shorthand commands.
+```shell
+npm-run-all clean lint build:*     // npm-s .....
+npm-run-all --parallel watch:*     // npm-p .....
+```

@@ -41,7 +41,7 @@ function outputEntriesDefine(out, entries){
     entries.forEach(function(entry,idx){
         out.write('\t');
         out.write(JSON.stringify(entry,null,"\t"));
-        if(idx !== entries.length){
+        if(idx !== entries.length-1){
             out.write(',');
         }
         out.write('\n');
