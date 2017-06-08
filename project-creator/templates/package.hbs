@@ -10,7 +10,8 @@
     "lint:js": "eslint \"{__tests__,test,src,pages/src,pages/lib}/**/*.js\"",
     "flow": "flow",
     "type-check": "flow check",
-    "build" : "run-s type-check test compile",
+    "build" : "run-s build:*",
+    "build:dist": "run-s type-check clean:dist compile test",
     "compile": "babel src -d dist",
     {{#if browserify}}
     "watch": "watchify src/main.js -o build/common-bundle.js --debug ",
@@ -25,8 +26,11 @@
     "build": "cross-env webpack --config ./webpack.config.js  --progress --hide-modules",
     {{/if}}
     "predeploy": "npm run build",
-    "deploy": "echo deploy!!",
-    "test": "mocha"
+    "deploy": "(test 1 -eq 1 || cd ./pages/out && git init && git config user.name \"Travis CI\" && git config user.email \"github@fb.com\" && git add . && git commit -m \"Deploy to GitHub Pages\" && git push --force --quiet \"https://${GH_TOKEN}@github.com/facebook/immutable-js.git\" master:gh-pages > /dev/null 2>1)",
+    "test": "mocha",
+    "test:travis": "npm run test && ./resources/check-changes.sh",
+    "clean:build": "rimraf build",
+    "clean:dist": "rimraf dist"
   },
   {{#if browserify}}
   "browserify-shim": {
@@ -128,6 +132,7 @@
     "vue-template-compiler": "latest",
 
     "flow-bin": "latest",
+    "rimraf": "latest",
 
     "cross-env": "latest",
     "watchify": "latest",
