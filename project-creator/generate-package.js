@@ -13,6 +13,7 @@ let generateHbsObj = function(atomConfig){
     let ret = {};
     ret.name = atomConfig.name;
     ret.version = atomConfig.version;
+    ret.lib = atomConfig.lib;
     ret[atomConfig.builder] = true;
     var fwSupportList = ["page" , "director" , "react" , "vue" ];
     fwSupportList.forEach(function(fw){

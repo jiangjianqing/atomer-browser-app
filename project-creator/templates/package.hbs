@@ -10,13 +10,18 @@
     "lint:js": "eslint \"{__tests__,test,src,pages/src,pages/lib}/**/*.js\"",
     "flow": "flow",
     "type-check": "flow check",
-    "build" : "run-s build:*",
-    "build:dist": "run-s type-check clean:dist compile test",
-    "compile": "babel src -d dist",
+
+    "build:dist": "run-s type-check clean:dist compile ",
+    {{#if lib}}
+    "build" : "run-s build:lib",
+    "build:lib": "run-s type-check clean:lib compile:lib test",
+    "compile:lib": "babel src -d dist",
+    "clean:lib": "rimraf lib",
+    {{/if}}
     {{#if browserify}}
-    "watch": "watchify src/main.js -o build/common-bundle.js --debug ",
+    "watch:bundle": "watchify src/main.js -o build/common-bundle.js --debug ",
     "serve": "echo 'http-server -o -s -c 1 -a localhost'",
-    "dev": "npm-run-all --parallel watch serve",
+    "dev": "npm-run-all --parallel watch:bundle serve",
     "bundle": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > build/common-bundle.js",
     {{/if}}
     {{#if webpack2}}
@@ -25,6 +30,7 @@
     "build-release": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --hide-modules",
     "build": "cross-env webpack --config ./webpack.config.js  --progress --hide-modules",
     {{/if}}
+    "prepublish": "npm run build",
     "predeploy": "npm run build",
     "deploy": "(test 1 -eq 1 || cd ./pages/out && git init && git config user.name \"Travis CI\" && git config user.email \"github@fb.com\" && git add . && git commit -m \"Deploy to GitHub Pages\" && git push --force --quiet \"https://${GH_TOKEN}@github.com/facebook/immutable-js.git\" master:gh-pages > /dev/null 2>1)",
     "test": "mocha",
