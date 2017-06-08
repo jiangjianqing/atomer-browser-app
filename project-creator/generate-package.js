@@ -50,11 +50,27 @@ module.exports = function(appPath){
 //匹配json内容
     let pkgObj = JSON.parse(template(hbsContext));
 
+    let isPkgExist = false;
+
     if (pkgFilePath){
+        let oldPkgObj = {};
+        //对已有的package.json进行保护，其他文件的处理也会依赖该部分结果
+        if (fs.existsSync(pkgFilePath)){
+            oldPkgObj = require(path.resolve(pkgFilePath));
+            isPkgExist = true;
+            //delete pkgObj.version;  // keep version
+            delete pkgObj.private;  //keep private
+            //delete pkgObj.output;  //keep output
+            delete oldPkgObj.scripts; //update scripts
+            delete oldPkgObj.devDependencies; //update devDependencies
+            pkgObj = Object.assign(pkgObj, oldPkgObj);
+        }
+
         saveFile(pkgFilePath, JSON.stringify(pkgObj,null,'\t'));
     }
 
     return {
+        "isPkgExist" : isPkgExist,
         "pkg" : pkgObj,
         "atomConfig" : atomConfig,
         "hbsContext" : hbsContext

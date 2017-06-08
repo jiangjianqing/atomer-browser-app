@@ -34,9 +34,14 @@ if (!fs.existsSync(appPath)){
 }
 
 var ret = creater.generatePackage(appPath);
-let hbsContext = ret.hbsContext;
-creater.copyFiles(appPath, hbsContext);
-creater.generateTravis(appPath, hbsContext);
+if (ret.isPkgExist){
+    console.log(colors.warn("Warning:Dest package.json is exist, just update it ,other operations are ignored!"));
+}else{
+    let hbsContext = ret.hbsContext;
+    creater.copyFiles(appPath, hbsContext);
+    creater.generateTravis(appPath, hbsContext);
+}
+
 
 
 
