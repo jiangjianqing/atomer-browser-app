@@ -15,7 +15,7 @@
     {{#if lib}}
     "build" : "run-s build:lib",
     "build:lib": "run-s type-check clean:lib compile:lib test",
-    "compile:lib": "babel src -d dist",
+    "compile:lib": "babel src -d lib",
     "clean:lib": "rimraf lib",
     {{#if private}}
     {{else}}
