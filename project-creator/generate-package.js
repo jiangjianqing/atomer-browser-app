@@ -63,7 +63,7 @@ module.exports = function(appPath){
             //delete pkgObj.output;  //keep output
             delete oldPkgObj.scripts; //update scripts
             delete oldPkgObj.devDependencies; //update devDependencies
-            pkgObj = Object.assign(pkgObj, oldPkgObj);
+            pkgObj = Object.assign({},pkgObj, oldPkgObj);
         }
 
         saveFile(pkgFilePath, JSON.stringify(pkgObj,null,'\t'));
