@@ -1,7 +1,10 @@
 [
 {{#if webpack2}}
     "webpack.config.js",
+    {{#if isPkgExist}}
+    {{else}}
     "webpack.dll.config.js",
+    {{/if}}
 {{/if}}
 {{#if browserify}}
     ".jshintrc",
