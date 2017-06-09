@@ -2,9 +2,9 @@ var webpack = require('webpack');
 var path = require('path');
 var AssetsPlugin = require('assets-webpack-plugin');
 
-var package = require("./package.json");
+var pkg = require("./package.json");
 
-var BUILD_PATH = path.resolve(package.output? package.output : './build');
+var BUILD_PATH = path.resolve(pkg.output ? pkg.output : './build');
 
 module.exports = {
     entry: {
@@ -87,7 +87,7 @@ module.exports = {
             }
         }),
         new webpack.DllPlugin({
-            path: path.resolve(BUILD_PATH+'/dll-manifest.json'),
+            path: path.resolve(BUILD_PATH + '/dll-manifest.json'),
             name: '[name]',
             context: __dirname
         }),
