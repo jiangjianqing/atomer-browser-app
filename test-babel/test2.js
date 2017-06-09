@@ -2,7 +2,7 @@
 //require('babel-polyfill');
 
 //或者在.babelrc中使用 transform-runtime plugin
-
+let y = require('./test');
 
 function sleep(ms = 0) {
     return new Promise((resolve, reject) => setTimeout(resolve, ms));

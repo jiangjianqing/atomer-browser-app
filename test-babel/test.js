@@ -9,4 +9,6 @@ console.log(a,b,c);
 
 export const test1 = 123;
 
-export default function y() { }
+function y() { }
+
+export default y;
