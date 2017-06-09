@@ -76,9 +76,9 @@
     ]
   },
   "dependencies": {
+    "atomer-common-lib": "latest",
     "axios": "^0.16.2",
     "handlebars": "^4.0.8",
-    "js-cookie": "^2.1.4",
     "page": "^1.7.1",
     "q": "^1.5.0",
     "react": "^15.5.4",
