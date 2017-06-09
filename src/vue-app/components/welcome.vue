@@ -16,7 +16,7 @@
         },
         methods: {
             showDialog : function(){
-                let serviceManager = require('service-manager');
+                let serviceManager = require('atomer-common-lib').serviceManager;
                 serviceManager.get('dialog').show({
                     title : this.message? this.message : "welcome"
                 });

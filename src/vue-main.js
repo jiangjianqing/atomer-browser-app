@@ -22,6 +22,6 @@ const app = new Vue({
         ViewComponent: {render: h => h('div', 'loading...')}
     },
     render (h) {
-        return h(require('./layouts/app.vue'))
+        return h(require('./vue-app/app.vue'))
     }
 });

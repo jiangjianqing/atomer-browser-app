@@ -9,7 +9,7 @@
 <script>
     import AppNav from './app-nav.vue';
     import AppView from './app-view.vue';
-    import AppDialog from '../components/common/dialog.vue';
+    import AppDialog from './components/common/dialog.vue';
 
 
     import businessEntires from './business-entries';

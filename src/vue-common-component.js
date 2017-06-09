@@ -33,17 +33,16 @@ function plugin(Vue, options) {
         return;
     }
     console.log("自定义组件正在加载!");
-    Vue.component('welcome',require('./components/welcome.vue'));
-    Vue.component('toolbar',require('./components/common/toolbar.vue'));
+    Vue.component('welcome',require('./vue-app/components/welcome.vue'));
     Vue.component(
-        'v-link',
+        'toolbar',
         //20170525 : 经测试，以下webpac import的异步加载语法无法使用，但使用require写法可以
         //() => import('./components/VLink.vue')
         function (resolve, reject) {
             // This special require syntax will instruct Webpack to
             // automatically split your built code into bundles which
             // are loaded over Ajax requests.
-            require(['./components/VLink.vue'], resolve)
+            require(['./vue-app/components/common/toolbar.vue'], resolve)
         }
     );
     //Vue.directive('e-accordion', require('./accordion'))

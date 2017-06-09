@@ -31,7 +31,7 @@
 <script>
     //modal-footer 的内容根据dialog.type确定
 
-    let serviceManager = require('service-manager');
+    let serviceManager = require('atomer-common-lib').serviceManager;
     let vm;
     let $dialogEl;
     let dialog = {

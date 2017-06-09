@@ -23,7 +23,7 @@ const entries = weaver["business-entries"].sort(function(a,b){
     return a.sn > b.sn;
 });
 
-let entryFileName = path.resolve('./src/layouts/business-entries.js');
+let entryFileName = path.resolve('./src/vue-app/business-entries.js');
 
 var out = fs.createWriteStream(entryFileName);
 const banner = `
@@ -41,7 +41,7 @@ function outputEntriesDefine(out, entries){
     entries.forEach(function(entry,idx){
         out.write('\t');
         out.write(JSON.stringify(entry,null,"\t"));
-        if(idx !== entries.length-1){
+        if(idx !== entries.length - 1){
             out.write(',');
         }
         out.write('\n');
