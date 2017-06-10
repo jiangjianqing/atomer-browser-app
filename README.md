@@ -89,3 +89,12 @@ npm-s and npm-p are shorthand commands.
 npm-run-all clean lint build:*     // npm-s .....
 npm-run-all --parallel watch:*     // npm-p .....
 ```
+
+#babel "add-module-exports" 作用:
+es6模块转es5时，加入一句module.exports['default'] = xxx
+
+这样可以兼容 es6的export default 和commonjs 的module.exports
+
+#20170610
+rollup对于非es6的package兼容性不好，目前测试不成功，将以webpack2为主
+,后续继续观察
