@@ -13,8 +13,8 @@ initer.configureProduction(function(){
 });
 
 initer.configureDevelopment(function(){
-	// Enable the logger.
-  debug.enable('*');
+	// Enable the logger.指定范围的才有效，否则可能会引入无关的debug输出
+  debug.enable('app:*,component:*');
   log('init : 当前处于生产环境,Logging is enabled!');
 });
 
