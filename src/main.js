@@ -14,8 +14,8 @@ let Router = require('router'); //director router的导入方式
 
 //require('./config-route');
 let routes = {
-    "/" : ()=>require("./vue-main"),
-    "/react" : ()=>require("./react-main.jsx")
+    "/" : ()=>require("./scripts/vue-main"),
+    "/react" : ()=>require("./scripts/react-main.jsx")
 };
 
 

@@ -23,7 +23,7 @@ const entries = weaver["business-entries"].sort(function(a,b){
     return a.sn > b.sn;
 });
 
-let entryFileName = path.resolve('./src/vue-app/business-entries.js');
+let entryFileName = path.resolve('./src/scripts/vue-app/business-entries.js');
 
 var out = fs.createWriteStream(entryFileName);
 const banner = `
@@ -55,7 +55,7 @@ function outputVueComponentRegist(out, entries){
     entries.forEach(function(entry,idx){
         let comPath = entry["component-path"];
         if (!comPath.match(/^@/)){  //这里需要注意：使用本地目录后可能会导致在不同pc上的不兼容，所以每次新获取后都要重新weave一下
-            comPath = path.resolve('./src/' + comPath);
+            comPath = path.resolve('./src/scripts/' + comPath);
         }
         out.write(`Vue.component('${entry.name}', require('${comPath}'));\n`);
 

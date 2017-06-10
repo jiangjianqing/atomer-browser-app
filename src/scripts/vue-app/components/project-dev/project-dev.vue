@@ -29,7 +29,7 @@
 
 <script>
     let axios = require('axios');
-    let modules= require('../../../../atom.json');
+    let modules= require('../../../../../atom.json');
 
     export default {
         data : function(){
