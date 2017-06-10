@@ -58,7 +58,16 @@ module.exports = {
                 use : [ //多个loader一起使用
                     {//es2015处理
                         loader : 'babel-loader'
-                    }//,
+                    },
+				  	{
+					  loader : 'string-replace-loader',
+					  options: {
+						multiple: [
+							//通过字符串替换来将环境参数传入代码中（仅限browser代码，node下运行的代码其实不需要这一步处理，可以直接访问process）
+						  { search: 'NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
+						]
+					  }
+				  	}
                     //重要：结合使用webpack和browserify的transform，但最好不要使用browserify的transform
                     //"transform-loader?brfs",  //20170601  加入react jsx  处理后，出现SyntaxError: Unexpected token (5:16)
                     //"transform-loader?browserify-shim"

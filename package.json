@@ -128,6 +128,7 @@
     "npm-run-all": "^4.0.2",
     "reactify": "^1.1.1",
     "rimraf": "^2.6.1",
+    "string-replace-loader": "^1.2.0",
     "transform-loader": "^0.2.4",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
