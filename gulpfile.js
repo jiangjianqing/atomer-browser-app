@@ -2,6 +2,8 @@
  * Created by jjq on 5/18/17.
  */
 var gulp = require('gulp');
+const babel = require('gulp-babel');
+const watch = require('gulp-watch');
 var browserify = require('browserify');
 var pkg = require('./package.json');
 
@@ -20,7 +22,7 @@ var paths = {
 //20170601 非常重要：transform的顺序有严格要求,babelify 一定要放在最前面,否则会有问题，详细见package.json[transform]
 //20170601 vueify存在问题,require('xxx.vue')时会出现[Vue warn]: Failed to mount component: template or render function not defined
 //20170601 暂时性结论,browserify目前不适合对.vue文件进行bundle操作,webpack更合适,react目前无问题
-gulp.task("build", function(){
+gulp.task("bundle", function(){
     var b = browserify(browserifyOpts);
     //20170520：还没找到在package.json中放requre的格式
     b.require('./lib/services/browser-storage', {expose: 'browser-storage'});
@@ -45,4 +47,23 @@ gulp.task("build", function(){
      */
 });
 
-gulp.task('default', ["build"]);
+gulp.task('default', ["bundle"]);
+
+//------------以下为lib开发时使用的watch--------
+//watch有两种模式 strem 和 callback ，目前使用stream
+gulp.task('stream', function () {
+  // Endless stream mode
+  return watch('src/**/*.js', { ignoreInitial: false , verbose: true})
+	  .pipe(babel())
+	  .pipe(gulp.dest('.'));
+});
+
+gulp.task('callback', function () {
+  // Callback mode, useful if any plugin in the pipeline depends on the `end`/`flush` event
+  return watch('css/**/*.css', function () {
+	gulp.src('css/**/*.css')
+		.pipe(gulp.dest('build'));
+  });
+});
+
+gulp.task('watch', ["stream"]);

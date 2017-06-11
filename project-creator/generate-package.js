@@ -14,13 +14,30 @@ let generateHbsObj = function(atomConfig){
     ret.name = atomConfig.name;
     ret.version = atomConfig.version;
     ret.lib = atomConfig.lib;
-    ret[atomConfig.builder] = true;
+    if (atomConfig.bin){
+	  ret.lib = true;
+	  ret.bin = true;
+	}
+	if (!ret.lib){
+	  ret[atomConfig.builder] = true;
+	  if(atomConfig.builder === "browserify"){
+		ret.babel = true;
+	  }
+	}else{
+	  ret.babel = true;
+	}
+
+
+
     var fwSupportList = ["page" , "director" , "react" , "vue" ];
-    fwSupportList.forEach(function(fw){
-        if (atomConfig.frameworks.indexOf(fw) > -1){
-            ret[fw] = true;
-        }
-    });
+    if(atomConfig.frameworks){
+	  fwSupportList.forEach(function(fw){
+		if (atomConfig.frameworks.indexOf(fw) > -1){
+		  ret[fw] = true;
+		}
+	  });
+	}
+
     return ret;
 };
 

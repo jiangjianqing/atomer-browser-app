@@ -10,17 +10,20 @@
     "lint:js": "eslint \"{__tests__,test,src,pages/src,pages/lib}/**/*.js\"",
     "flow": "flow",
     "type-check": "flow check",
-
-    "build:dist": "run-s type-check clean:dist compile ",
+    "compile": "run-s clean compile:*",
     {{#if lib}}
-    "build" : "run-s build:lib",
-    "build:lib": "run-s type-check clean:lib compile:lib test",
-    "compile:lib": "babel src -d lib",
-    "clean:lib": "rimraf lib",
+    "build": "run-s type-check compile test",
+    "compile:lib": "babel src/lib -d lib",
+    "watch:build": "gulp watch",
+    "dev": "run-s build watch:build",
     {{#if private}}
     {{else}}
         "prepublish": "npm run build",
     {{/if}}
+    {{/if}}
+
+    {{#if bin}}
+    "compile:bin": "babel src/bin -d bin",
     {{/if}}
     {{#if browserify}}
     "watch:bundle": "watchify src/main.js -o build/common-bundle.js --debug ",
@@ -34,10 +37,17 @@
     "build-release": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --hide-modules",
     "build": "cross-env webpack --config ./webpack.config.js  --progress --hide-modules",
     {{/if}}
-    "predeploy": "npm run build",
-    "deploy": "(test 1 -eq 1 || cd ./pages/out && git init && git config user.name \"Travis CI\" && git config user.email \"github@fb.com\" && git add . && git commit -m \"Deploy to GitHub Pages\" && git push --force --quiet \"https://${GH_TOKEN}@github.com/facebook/immutable-js.git\" master:gh-pages > /dev/null 2>1)",
+    {{#if private}}
+    {{else}}
+        "predeploy": "npm run build",
+        "deploy": "(test 1 -eq 1 || cd ./pages/out && git init && git config user.name \"Travis CI\" && git config user.email \"github@fb.com\" && git add . && git commit -m \"Deploy to GitHub Pages\" && git push --force --quiet \"https://${GH_TOKEN}@github.com/facebook/immutable-js.git\" master:gh-pages > /dev/null 2>1)",
+    {{/if}}
+
     "test": "mocha",
     "test:travis": "npm run test && ./resources/check-changes.sh",
+    "clean": "run-s clean:*",
+    "clean:bin": "rimraf bin",
+    "clean:lib": "rimraf lib",
     "clean:build": "rimraf build",
     "clean:dist": "rimraf dist"
   },
@@ -92,8 +102,8 @@
     "handlebars": "latest"
   },
   "devDependencies": {
-    {{#if browserify}}
     "npm-run-all": "latest",
+    {{#if browserify}}
     "envify": "latest",
     "aliasify": "latest",
     "babelify": "latest",
@@ -106,11 +116,15 @@
     {{#if vue}}
     "vueify": "latest",
     {{/if}}
+    {{/if}}
+{{#if babel}}
     "gulp": "latest",
+    "gulp-babel": "latest",
+    "gulp-watch": "latest",
     "gulp-sourcemaps": "latest",
     "vinyl-buffer": "latest",
     "vinyl-source-stream": "latest",
-    {{/if}}
+{{/if}}
     {{#if webpack2}}
     "webpack": "^2.x",
     "webpack-dev-server": "^2.x",
