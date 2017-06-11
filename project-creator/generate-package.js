@@ -35,8 +35,6 @@ module.exports = function(appPath){
     if(fs.existsSync(atomConfigFilePath)){
         atomConfig = JSON.parse(fs.readFileSync(atomConfigFilePath,'utf-8'));
         pkgFilePath = appPath + "/package.json";
-    }else{
-        atomConfig = require('./app-atom-example');
     }
 
     console.log(atomConfig);
