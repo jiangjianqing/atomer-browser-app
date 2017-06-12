@@ -19,4 +19,4 @@ initer.configureDevelopment(function(){
 });
 
 //browserify 还没找到合适的replace插件
-initer.init(NODE_ENV);
+initer.init(process.env.NODE_ENV);

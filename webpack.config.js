@@ -65,8 +65,9 @@ module.exports = {
 					  loader : 'string-replace-loader',
 					  options: {
 						multiple: [
+						    //{ search: 'NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
 							//通过字符串替换来将环境参数传入代码中（仅限browser代码，node下运行的代码其实不需要这一步处理，可以直接访问process）
-						  { search: 'NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
+						  { search: 'process.env.NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
 						]
 					  }
 				  	}
