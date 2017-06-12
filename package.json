@@ -131,7 +131,7 @@
     "reactify": "^1.1.1",
     "rimraf": "^2.6.1",
     "rollup": "latest",
-    "rollup-plugin-babel": "^latest",
+    "rollup-plugin-babel": "latest",
     "rollup-plugin-commonjs": "latest",
     "rollup-plugin-css-only": "latest",
     "rollup-plugin-eslint": "latest",
