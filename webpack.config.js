@@ -113,29 +113,6 @@ module.exports = {
                         }
                     }
                 ]})
-                /*[
-                    {loader : "style-loader"},
-                    {
-                        loader : "css-loader",
-                        options : {
-                            modules : true,
-                            importLoaders: 1
-                        }
-                    },
-                    {
-                        loader : 'postcss-loader',
-                        options: {
-                            config: {
-                                ctx: {
-                                    cssnext: {},
-                                    cssnano: {},
-                                    autoprefixer: {}
-                                }
-                            }
-                        }
-                    }
-                ]
-                */
                 //loader:'style-loader!css-loader'//deprecated,感叹号的作用在于使同一文件能够使用不同类型的loader
             },
 
