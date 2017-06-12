@@ -4,6 +4,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 var pkg = require("./package.json");
 
@@ -87,16 +88,51 @@ module.exports = {
 
             {//3、CSS-loader
                 test:/\.css$/,
-                use : [
+                use : ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use:[
+                    //{loader : "style-loader"},
+                    {
+                        loader : "css-loader",
+                        options : {
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader : 'postcss-loader',
+                        options: {
+                            config: {
+                                ctx: {
+                                    cssnext: {},
+                                    cssnano: {}
+                                }
+                            }
+                        }
+                    }
+                ]})
+                /*[
                     {loader : "style-loader"},
                     {
                         loader : "css-loader",
                         options : {
-                            modules : true
+                            modules : true,
+                            importLoaders: 1
                         }
                     },
-                    'autoprefixer-loader'
+                    {
+                        loader : 'postcss-loader',
+                        options: {
+                            config: {
+                                ctx: {
+                                    cssnext: {},
+                                    cssnano: {},
+                                    autoprefixer: {}
+                                }
+                            }
+                        }
+                    }
                 ]
+                */
                 //loader:'style-loader!css-loader'//deprecated,感叹号的作用在于使同一文件能够使用不同类型的loader
             },
 
@@ -154,6 +190,7 @@ module.exports = {
     },
 
     plugins:[
+        new ExtractTextPlugin("[name].css?[contenthash]"),
         /*
         //CommonsChunkPlugin与dll一样可以实现类似的公共库分离效果，但dll可以前置编译，更好用
         new webpack.optimize.CommonsChunkPlugin({
