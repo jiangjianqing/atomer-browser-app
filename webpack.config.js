@@ -98,6 +98,7 @@ module.exports = {
                             //启用css module，在每个模块中单独加载自己需要使用的类，见http://www.ruanyifeng.com/blog/2016/06/css_modules.html
                             //要么全局css，要么模块css，只能二选一
                             //modules : true,
+                            localIdentName : "[path][name]---[local]---[hash:base64:5]", //modules = true 时才生效,设定名称规则
                             importLoaders: 1
                         }
                     },
