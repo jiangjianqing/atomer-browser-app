@@ -32,10 +32,10 @@
     "bundle": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > build/common-bundle.js",
     {{/if}}
     {{#if webpack2}}
-    "dev": "npm run build && cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js  --open",
+    "dev": "npm run bundle:debug && cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js  --open",
     "dll": "cross-env NODE_ENV=production webpack --config ./webpack.dll.config.js  --progress --colors",
-    "build-release": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --hide-modules",
-    "build": "cross-env webpack --config ./webpack.config.js  --progress --hide-modules",
+    "bundle:release": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --hide-modules",
+    "bundle:debug": "webpack --config ./webpack.config.js  --progress --hide-modules",
     {{/if}}
     {{#if private}}
     {{else}}
