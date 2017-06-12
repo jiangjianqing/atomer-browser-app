@@ -6,7 +6,9 @@ browserify对vue的支持不够，对react不错
 
 webpack2当前推荐使用。
 
-有时间会增加rollup的配置。
+#20170610
+rollup对于非es6的package兼容性不好，目前测试不成功，将以webpack2为主
+,后续继续观察
 
 ##q可以同时用于node和browser环境,所以使用
 https://www.npmjs.com/package/q
@@ -34,16 +36,10 @@ npm install -g karma-cli
 mocha则集成进命令行 -- 通过npm test 启动
 上述两种方法组合使用
 
-##babel的使用
-browserify中使用babelify   transform
-webpack中使用babel-loader
-mocha中使用参数配置直接调用babel
-
 ##更新dependencies
 ```shell
 npm outdated #查出哪些有更新
 ```
-
 
 ##初始化一个项目目录 （根据配置复制必要的文件）
 ```shell
@@ -57,20 +53,8 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 
 ```
 
-
-#检查nodejs对es标准的兼容程度
-npm -g install es-checker
-命令行执行：es-checker
-
-
-#如果要使用babel命令行，则需要安装babel-cli
-npm -g  install babel-cli
-
 #执行以下命令测试babel的支持能力
 babel-node src/test.js
-
-# 转码结果输出到标准输出
-$ babel example.js
 
 # -s 参数生成source map文件
 $ babel src -d lib -s
@@ -78,14 +62,10 @@ $ babel src -d lib -s
 # 使用 -w 参数，这个命令参数指定的是watch，每次code目录的文件修改后都会触发babel命令的再次执行。
 babel -w code/ -d build/
 
-#将src转码到dist
-npm run build
-
 #代码静态检查
 flow init  //用于生成.flowconfig文件
 
 #npm-run-all
-
 npm-s and npm-p are shorthand commands.
 ```shell
 npm-run-all clean lint build:*     // npm-s .....
@@ -96,7 +76,3 @@ npm-run-all --parallel watch:*     // npm-p .....
 es6模块转es5时，加入一句module.exports['default'] = xxx
 
 这样可以兼容 es6的export default 和commonjs 的module.exports
-
-#20170610
-rollup对于非es6的package兼容性不好，目前测试不成功，将以webpack2为主
-,后续继续观察
