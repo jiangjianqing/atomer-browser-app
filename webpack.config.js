@@ -14,6 +14,8 @@ var dllBundleInfo = require(BUILD_OUTPUT + "/dll-bundle-info.json");
 
 var __DEV__ = !(process.env.NODE_ENV === 'production');
 
+var sourceMapType = __DEV__ ? false : 'source-map';
+
 var BUILD_PATH = __DEV__ ? path.resolve(BUILD_OUTPUT + '/dev') : path.resolve(BUILD_OUTPUT + '/release');
 
 module.exports = {
@@ -189,7 +191,7 @@ module.exports = {
     //这个选项可以在不影响构建速度的前提下生成完整的sourcemap，但是对打包后输出的JS文件的执行具有性能和安全的隐患。
     // 不过在开发阶段这是一个非常好的选项.
     //https://webpack.github.io/docs/configuration.html#devtool
-    devtool: '#eval-source-map'
+    devtool: sourceMapType
 };
 
 //如果是产品模式则设定一些
@@ -206,7 +208,7 @@ if (!__DEV__) {
             }
         }),
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap : true
+            sourceMap: sourceMapType && (sourceMapType.indexOf("sourcemap") >= 0 || sourceMapType.indexOf("source-map") >= 0)
         })
         //new ExtractTextPlugin("[name]-[hash].css")
     ]);

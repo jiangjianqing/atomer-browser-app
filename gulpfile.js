@@ -25,7 +25,7 @@ var paths = {
 gulp.task("bundle", function(){
     var b = browserify(browserifyOpts);
     //20170520：还没找到在package.json中放requre的格式
-    b.require('./lib/services/browser-storage', {expose: 'browser-storage'});
+    //b.require('./lib/services/browser-storage', {expose: 'browser-storage'});
 
     //注意：这里使用gulp.dest()输出时会出现问题，使用process.stdout输出则不会，测试后加入source和buffer急性转换即可
     return b.bundle()

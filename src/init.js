@@ -18,4 +18,5 @@ initer.configureDevelopment(function(){
   log('init : 当前处于生产环境,Logging is enabled!');
 });
 
+//browserify 还没找到合适的replace插件
 initer.init(NODE_ENV);

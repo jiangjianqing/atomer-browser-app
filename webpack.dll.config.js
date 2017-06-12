@@ -4,6 +4,10 @@ var AssetsPlugin = require('assets-webpack-plugin');
 
 var pkg = require("./package.json");
 
+var __DEV__ = !(process.env.NODE_ENV === 'production');
+
+var sourceMapType = __DEV__ ? false : 'source-map';
+
 var BUILD_PATH = path.resolve(pkg.output ? pkg.output : './build');
 
 module.exports = {
@@ -80,6 +84,7 @@ module.exports = {
         },
         modules:["node_modules",path.resolve(__dirname, "lib")]
     },
+    devtool: sourceMapType,
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
@@ -97,6 +102,7 @@ module.exports = {
             path: BUILD_PATH
         }),
         new webpack.optimize.UglifyJsPlugin({
+            sourceMap: sourceMapType && (sourceMapType.indexOf("sourcemap") >= 0 || sourceMapType.indexOf("source-map") >= 0),
             compress: {
                 warnings: false
             },
