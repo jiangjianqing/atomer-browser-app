@@ -14,6 +14,7 @@ let generateHbsObj = function(atomConfig){
     ret.name = atomConfig.name;
     ret.version = atomConfig.version;
     ret.lib = atomConfig.lib;
+    ret.private = atomConfig.private;
     if (atomConfig.bin){
 	  ret.lib = true;
 	  ret.bin = true;
