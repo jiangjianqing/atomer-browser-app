@@ -14,7 +14,14 @@ var dllBundleInfo = require(BUILD_OUTPUT + "/dll-bundle-info.json");
 
 var __DEV__ = !(process.env.NODE_ENV === 'production');
 
-var sourceMapType = __DEV__ ? false : 'source-map';
+/*
+ 开发环境推荐：
+ cheap-module-eval-source-map
+ 生产环境推荐：
+ cheap-module-source-map
+ 这也是下版本 webpack 使用 -d 命令启动 debug 模式时的默认选项
+ */
+var sourceMapType = __DEV__ ? 'cheap-module-eval-source-map' : "cheap-module-source-map";
 
 var BUILD_PATH = __DEV__ ? path.resolve(BUILD_OUTPUT + '/dev') : path.resolve(BUILD_OUTPUT + '/release');
 
