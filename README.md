@@ -1,3 +1,6 @@
+#对source-map支持比较好的浏览器
+特别注意：优先使用chrome
+
 #browserify和webpack
 browserify属于比较旧的，标记为deprecated，
 且当前案例中对.vue的支持有问题（应该是vueify的锅），react可以正常使用。
