@@ -3,7 +3,7 @@
  */
 
 require('./init');
-require('./styles/main.css');
+require('./styles/main.css');   //全局css标准写法：引入css
 
 let Vue = require('vue'); //20170523 : vue2.x需要这样使用
 //20170525 重要: page和director都是路由组件,page的介绍中可以学到一些route知识,director可以动态定义路由(Adhoc Routing 和 Scoped Routing)，各有优缺点

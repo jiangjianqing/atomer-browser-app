@@ -93,8 +93,11 @@ module.exports = {
                     use:[
                     //{loader : "style-loader"},
                     {
-                        loader : "css-loader",
-                        options : {
+                        loader: "css-loader",
+                        options: {
+                            //启用css module，在每个模块中单独加载自己需要使用的类，见http://www.ruanyifeng.com/blog/2016/06/css_modules.html
+                            //要么全局css，要么模块css，只能二选一
+                            //modules : true,
                             importLoaders: 1
                         }
                     },
