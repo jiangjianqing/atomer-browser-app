@@ -2,7 +2,7 @@
  * Created by jjq on 5/23/17.
  */
 
-require('./init');
+require('./init');  //标准初始化过程
 require('./styles/main.css');   //全局css标准写法：引入css
 
 let Vue = require('vue'); //20170523 : vue2.x需要这样使用
