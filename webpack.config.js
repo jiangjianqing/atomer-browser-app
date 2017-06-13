@@ -107,8 +107,7 @@ module.exports = {
                         options: {
                             config: {
                                 ctx: {
-                                    cssnext: {},
-                                    cssnano: {}
+                                    cssnano: !__DEV__
                                 }
                             }
                         }

@@ -136,14 +136,15 @@
     "assets-webpack-plugin": "latest",
     "babel-loader": "latest",
     "string-replace-loader": "latest",
-
-    "postcss-import": "latest",
-    "postcss-loader": "latest",
-    "postcss-cssnext": "latest",
     "style-loader": "latest",
     "extract-text-webpack-plugin": "latest",
+    "postcss-loader": "latest",
     {{/if}}
-
+    {{#if postcss}}
+    "precss": "latest",
+    "postcss-import": "latest",
+    "postcss-cssnext": "latest",
+    {{/if}}
     "eslint": "latest",
     "eslint-config-atomer": "latest",
     "eslint-plugin-flowtype": "latest",

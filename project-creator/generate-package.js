@@ -1,7 +1,8 @@
 /**
  * Created by jjq on 6/2/17.
  */
-
+let debug = require("debug")("generate-package");
+let colors = require('colors');
 let fs = require('fs');
 let path = require('path');
 let Handlebars = require('handlebars');
@@ -18,12 +19,19 @@ let generateHbsObj = function(atomConfig){
     if (atomConfig.bin){
 	  ret.lib = true;
 	  ret.bin = true;
+        debug(colors.blue("enable lib"));
 	}
 	if (!ret.lib){
 	  ret[atomConfig.builder] = true;
 	  if(atomConfig.builder === "browserify"){
-		ret.babel = true;
-	  }
+          debug(colors.blue("enable babel"));
+          ret.babel = true;
+	  }else{
+	      if (["webpack2","rollup"].indexOf(atomConfig.builder) > -1){
+              debug(colors.blue("enable postcss"));
+              ret.postcss = true;
+          }
+      }
 	}else{
 	  ret.babel = true;
 	}
