@@ -2,14 +2,12 @@
 特别注意：优先使用chrome
 
 #browserify和webpack
-browserify属于比较旧的，标记为deprecated，
-且当前案例中对.vue的支持有问题（应该是vueify的锅），react可以正常使用。
+browserify比较旧，适合用于开发传统型通用库。注意：在当前案例中对.vue的支持有问题（应该是vueify的锅），react可以正常使用。
 browserify没有找到合适的replace插件来处理NODE_ENV变量(gulp-replace无法过滤node_modules目录,这一个功能非常重要，browserify显得弱了)
 browserify对vue的支持不够，对react不错
 
 webpack2当前推荐使用。
 
-#20170610
 rollup对于非es6的package兼容性不好，目前测试不成功，将以webpack2为主
 ,后续继续观察
 
