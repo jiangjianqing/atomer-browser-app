@@ -4,6 +4,7 @@
   "description": "skeleton of my browser app",
   "main": "index.js",
   "output": "./build",
+  "sourcePath": "./src",
   "scripts": {
     "postcss": "postcss src/**/*.css -o build/main.css -m",
     "clean:dist": "rimraf dist",

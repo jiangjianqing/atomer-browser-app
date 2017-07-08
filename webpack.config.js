@@ -10,6 +10,8 @@ var pkg = require("./package.json");
 
 var BUILD_OUTPUT = path.resolve(pkg.output ? pkg.output : './build');
 
+var SOURCE_PATH = path.resolve(pkg.sourcePath ? pkg.sourcePath : './src');
+
 //dllBundleInfo是在webpack.dll中生成，记录了所有bundle的文件信息，用于向index.hbs中注入
 var dllBundleInfo = require(BUILD_OUTPUT + "/dll-bundle-info.json");
 
@@ -32,7 +34,7 @@ module.exports = {
     entry: {
         //app: [/*'babel-polyfill',*/path.join(__dirname, "/lib/entry.js")],
         app: [
-            /*'babel-polyfill',*/path.join(__dirname, "/src/main.js")]
+            /*'babel-polyfill',*/path.join(SOURCE_PATH, "/main.js")]
         //, vendor: [
             //'vue'
             /*
@@ -184,7 +186,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             //favicon:'./src/images/icon_logo.png', //favicon路径
             filename: 'index.html', //生成的html存放路径，相对于 path
-            template: './src/template/index.hbs', //html模板路径
+            template: path.join(SOURCE_PATH , '/template/index.hbs'), //html模板路径
             dllBundleInfo: dllBundleInfo, //向index.hbs中注入bundle文件
             inject: true,
             hash: true,
