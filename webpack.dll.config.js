@@ -22,12 +22,13 @@ var __DEV__ = !(process.env.NODE_ENV === 'production');
  */
 var sourceMapType = __DEV__ ? 'cheap-module-eval-source-map' : "cheap-module-source-map";
 
-var BUILD_PATH = path.resolve(pkg.output ? pkg.output : './build');
+var BUILD_OUTPUT = path.resolve(pkg.output ? pkg.output : './build');
+
+var BUILD_PATH = (__DEV__ ? path.resolve(BUILD_OUTPUT + '/debug') : path.resolve(BUILD_OUTPUT + '/release')) + "/static";
 
 module.exports = {
     entry: {
         vender: [//公共组件
-            "inherits",
             "assert",
             "events",
             "querystring",
