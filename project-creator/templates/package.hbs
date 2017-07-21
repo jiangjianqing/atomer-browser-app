@@ -15,7 +15,7 @@
     "build": "run-s type-check compile test",
     "compile:lib": "babel src/lib -d lib",
     "watch:build": "gulp watch",
-    "dev": "run-s build watch:build",
+    "debug": "run-s build watch:build",
     {{#if private}}
     {{else}}
         "prepublish": "npm run build",
@@ -28,14 +28,18 @@
     {{#if browserify}}
     "watch:bundle": "watchify src/main.js -o build/common-bundle.js --debug ",
     "serve": "echo 'http-server -o -s -c 1 -a localhost'",
-    "dev": "npm-run-all --parallel watch:bundle serve",
+    "debug": "npm-run-all --parallel watch:bundle serve",
     "bundle": "cross-env NODE_ENV=production browserify -g envify src/main.js | uglifyjs -c warnings=false -m > build/common-bundle.js",
     {{/if}}
     {{#if webpack2}}
-    "dev": "npm run bundle:debug && cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js  --open",
-    "dll": "cross-env NODE_ENV=production webpack --config ./webpack.dll.config.js  --progress --colors",
+    "debug": "  run-s dll:debug bundle:debug serve:debug",
+    "release": "  run-s dll:release bundle:release serve:release",
+    "serve:debug": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack.config.js  --open",
+    "serve:release": "cross-env NODE_ENV=production webpack-dev-server --config ./webpack.config.js  --open",
+    "dll:debug": "cross-env NODE_ENV=development webpack --config ./webpack.dll.config.js  --progress --colors",
+    "dll:release": "cross-env NODE_ENV=production webpack --config ./webpack.dll.config.js  --progress --colors",
+    "bundle:debug": "cross-env NODE_ENV=development webpack --config ./webpack.config.js  --progress --hide-modules",
     "bundle:release": "cross-env NODE_ENV=production webpack --config ./webpack.config.js  --progress --hide-modules",
-    "bundle:debug": "webpack --config ./webpack.config.js  --progress --hide-modules",
     {{/if}}
     {{#if private}}
     {{else}}

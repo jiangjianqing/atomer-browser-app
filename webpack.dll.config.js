@@ -4,6 +4,13 @@ var AssetsPlugin = require('assets-webpack-plugin');
 
 var pkg = require("./package.json");
 
+if ( process.env.NODE_ENV  === null ){
+    console.log("--------------警告：process.env.NODE_ENV没有设置，默认使用development-------------------------");
+}else{
+    console.log(`--------------注意：process.env.NODE_ENV = ${process.env.NODE_ENV} -------------------------`);
+}
+
+var NODE_ENV = process.env.NODE_ENV || "development";
 var __DEV__ = !(process.env.NODE_ENV === 'production');
 
 /*
@@ -20,20 +27,27 @@ var BUILD_PATH = path.resolve(pkg.output ? pkg.output : './build');
 module.exports = {
     entry: {
         vender: [//公共组件
+            "inherits",
             "assert",
             "events",
             "querystring",
             "stream",
             "util",
             "buffer",
-            "vue",
             "q",
             "axios",
             "handlebars",
+            "classnames",
+            "react-redux",
+            "redux",
+            "redux-logger",
+            "redux-thunk",
+            "prop-types",
+            'react-dom',
             "react"
             /*
             'react',
-            'react-dom',
+
             'react-router',
             'react-bootstrap',
             'redux',
@@ -60,10 +74,10 @@ module.exports = {
         rules:[
             {
                 test: /\.css$/,
-                use:['style-loader', 'css-loader', 'autoprefixer-loader']
+                use:['style-loader', 'css-loader']
             },{
                 test: /\.less$/,
-                use:['style-loader', 'css-loader', 'autoprefixer-loader', 'less-loader']
+                use:['style-loader', 'css-loader', 'less-loader']
             },
             {
                 test: /\.hbs/,
@@ -94,8 +108,9 @@ module.exports = {
     devtool: sourceMapType,
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
+            'process.env' : {
+                NODE_ENV : JSON.stringify(NODE_ENV),
+                BABEL_ENV : JSON.stringify(NODE_ENV)
             }
         }),
         new webpack.DllPlugin({

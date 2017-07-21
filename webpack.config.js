@@ -10,12 +10,18 @@ var pkg = require("./package.json");
 
 var BUILD_OUTPUT = path.resolve(pkg.output ? pkg.output : './build');
 
-var SOURCE_PATH = path.resolve(pkg.sourcePath ? pkg.sourcePath : './src');
-
 //dllBundleInfo是在webpack.dll中生成，记录了所有bundle的文件信息，用于向index.hbs中注入
 var dllBundleInfo = require(BUILD_OUTPUT + "/dll-bundle-info.json");
 
-var __DEV__ = !(process.env.NODE_ENV === 'production');
+if ( process.env.NODE_ENV  === null ){
+    console.log("--------------警告：process.env.NODE_ENV没有设置，默认使用development-------------------------");
+}else{
+    console.log(`--------------注意：process.env.NODE_ENV = ${process.env.NODE_ENV} -------------------------`);
+}
+
+var NODE_ENV = process.env.NODE_ENV || "development";
+var __DEV__ = !(NODE_ENV === 'production');
+
 
 /*
  开发环境推荐：
@@ -34,7 +40,7 @@ module.exports = {
     entry: {
         //app: [/*'babel-polyfill',*/path.join(__dirname, "/lib/entry.js")],
         app: [
-            /*'babel-polyfill',*/path.join(SOURCE_PATH, "/main.js")]
+            /*'babel-polyfill',*/path.join(__dirname, "/src/main.js")]
         //, vendor: [
             //'vue'
             /*
@@ -77,7 +83,7 @@ module.exports = {
 						multiple: [
 						    //{ search: 'NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
 							//通过字符串替换来将环境参数传入代码中（仅限browser代码，node下运行的代码其实不需要这一步处理，可以直接访问process）
-						  { search: 'process.env.NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
+						  //{ search: 'process.env.NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
 						]
 					  }
 				  	}
@@ -186,7 +192,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             //favicon:'./src/images/icon_logo.png', //favicon路径
             filename: 'index.html', //生成的html存放路径，相对于 path
-            template: path.join(SOURCE_PATH , '/template/index.hbs'), //html模板路径
+            template: './src/template/index.hbs', //html模板路径
             dllBundleInfo: dllBundleInfo, //向index.hbs中注入bundle文件
             inject: true,
             hash: true,
@@ -198,6 +204,12 @@ module.exports = {
                 removeScriptTypeAttributes: true,
                 removeStyleLinkTypeAttributes: true,
                 removeComments: true
+            }
+        }),
+        new webpack.DefinePlugin({
+            'process.env' : {
+                NODE_ENV : JSON.stringify(NODE_ENV),
+                BABEL_ENV : JSON.stringify(NODE_ENV)
             }
         })
 
@@ -228,12 +240,6 @@ if (!__DEV__) {
     // http://vue-loader.vuejs.org/en/workflow/production.html
 
     module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"',
-                BABEL_ENV: JSON.stringify('production')
-            }
-        }),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: sourceMapType && (sourceMapType.indexOf("sourcemap") >= 0 || sourceMapType.indexOf("source-map") >= 0)
         })
