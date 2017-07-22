@@ -27,9 +27,11 @@ var __DEV__ = !(NODE_ENV === 'production');
  cheap-module-source-map
  这也是下版本 webpack 使用 -d 命令启动 debug 模式时的默认选项
  */
-var sourceMapType = __DEV__ ? 'cheap-module-eval-source-map' : "cheap-module-source-map";
+let sourceMapType = __DEV__ ? 'cheap-module-eval-source-map' : "cheap-module-source-map";
 
-var BUILD_PATH = (__DEV__ ? path.resolve(BUILD_OUTPUT + '/debug') : path.resolve(BUILD_OUTPUT + '/release')) + "/static";
+let SOURCE_PATH = path.resolve(pkg.sourcePath ? pkg.sourcePath : './src');
+
+let BUILD_PATH = (__DEV__ ? path.resolve(BUILD_OUTPUT + '/debug') : path.resolve(BUILD_OUTPUT + '/release')) + "/static";
 
 module.exports = {
     //2、进出口文件配置
@@ -37,7 +39,7 @@ module.exports = {
     entry: {
         //app: [/*'babel-polyfill',*/path.join(__dirname, "/lib/entry.js")],
         app: [
-            /*'babel-polyfill',*/path.join(__dirname, "/src/main.js")]
+            /*'babel-polyfill',*/path.join(SOURCE_PATH, "/main.js")]
         //, vendor: [
             //'vue'
             /*
@@ -80,7 +82,7 @@ module.exports = {
 						multiple: [
 						    //{ search: 'NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
 							//通过字符串替换来将环境参数传入代码中（仅限browser代码，node下运行的代码其实不需要这一步处理，可以直接访问process）
-						  //{ search: 'process.env.NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
+						  { search: 'process.env.NODE_ENV', replace: JSON.stringify(process.env.NODE_ENV || 'development') }
 						]
 					  }
 				  	}
@@ -189,7 +191,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             //favicon:'./src/images/icon_logo.png', //favicon路径
             filename: '../index.html', //生成的html存放路径，相对于 path
-            template: './src/template/index.hbs', //html模板路径
+            template: path.join(SOURCE_PATH , '/template/index.hbs'), //html模板路径
             dllBundleInfo: require(BUILD_PATH + "/dll-bundle-info.json"), //向index.hbs中注入bundle文件
             inject: true,
             hash: true,
