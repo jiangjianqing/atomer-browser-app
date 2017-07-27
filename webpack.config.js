@@ -19,6 +19,23 @@ if ( process.env.NODE_ENV  === null ){
 var NODE_ENV = process.env.NODE_ENV || "development";
 var __DEV__ = !(NODE_ENV === 'production');
 
+let app = (function(pkg){
+    let app = pkg.app || {};
+    let {title , version} = app;
+    if (!title){
+        title = pkg.name;
+    }
+    if (!version){
+        version = pkg.version;
+    }
+    return {
+        title , version
+    }
+})(pkg);
+
+let TITLE = app.title;
+let VERSION = app.version;
+
 
 /*
  开发环境推荐：
@@ -190,6 +207,8 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             //favicon:'./src/images/icon_logo.png', //favicon路径
+            title: TITLE, //利用HtmlWebpackPlugin原有属性
+            version: VERSION, //自定义属性
             filename: '../index.html', //生成的html存放路径，相对于 path
             template: path.join(SOURCE_PATH , '/template/index.hbs'), //html模板路径
             dllBundleInfo: require(BUILD_PATH + "/dll-bundle-info.json"), //向index.hbs中注入bundle文件

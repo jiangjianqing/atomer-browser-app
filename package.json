@@ -5,6 +5,10 @@
   "main": "index.js",
   "output": "./build",
   "sourcePath": "./src",
+  "app": {
+      "title": "browser-app",
+      "version": "2017.07"
+  },
   "scripts": {
     "postcss": "postcss src/**/*.css -o build/main.css -m",
     "clean:dist": "rimraf dist",
